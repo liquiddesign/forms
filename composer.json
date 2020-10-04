@@ -3,7 +3,7 @@
 	"description": "Ⓕ Vícejazyčné formuláře do Nette, doplněné o nové prvky, wysiwyg, antispam kontrolu a prevenci doubleclicku",
 	"license": "MIT",
 	"autoload": {
-		"psr-4": {"Tables\\": "src/"}
+		"psr-4": {"Forms\\": "src/"}
 	},
 	"require" :
 	{
