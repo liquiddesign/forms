@@ -1,0 +1,55 @@
+{ifset $polyfills}
+{do $polyfills = Nette\Utils\Arrays::normalize($polyfills)}
+<script n:ifset="$polyfills['tail.select']" src="{$nodeUrl}/tail.select/js/tail.select.js"></script>
+<script n:ifset="$polyfills['flatpickr']" src="{$nodeUrl}/flatpickr/dist/flatpickr.js"></script>
+<script n:ifset="$polyfills['nouislider']" src="{$nodeUrl}/nouislider/distribute/nouislider.js"></script>
+<script n:ifset="$polyfills['tinymce']" src="{$nodeUrl}/tinymce/tinymce.js"></script>
+<script n:ifset="$polyfills['tinymce']" src="{$baseUrl}/vendor/liquiddesign/tables/src/assets/tinymce.js"></script>
+
+<script>
+    if (typeof baseUrl === 'undefined') {
+        var baseUrl = {$baseUrl};
+	}
+
+    if (typeof nodeUrl === 'undefined') {
+		var nodeUrl = {$nodeUrl};
+    }
+
+    let extHomeUrl = {$baseUrl . '/vendor/liquiddesign/tables/src'};
+
+	let polyfills = [];
+    document.addEventListener("DOMContentLoaded", function(){
+		{foreach $polyfills as $name => $polyfill}
+			{if \is_array($polyfill)}
+				{foreach $polyfill as $id => $configuration}
+					{if $configuration !== null}
+						{if $name === 'flatpickr'}
+        					polyfills[{$id}] = flatpickr("#{$id|noescape}", {($configuration ? \json_encode($configuration) : '{}')|noescape});
+						{/if}
+						{if $name === 'nouislider'}
+        					polyfills[{$id}] = noUiSlider.create(document.getElementById({$id}), {\json_encode($configuration)|noescape});
+        					polyfills[{$id}].on('update', function (values, handle) {
+        					    var inputFrom = document.getElementById({$id} + '-from');
+        					    var inputTo = document.getElementById({$id} + '-to');
+								var value = values[handle];
+
+								if (handle) {
+                                    inputTo.value = value;
+								} else {
+                                    inputFrom.value = value;
+								}
+							});
+						{/if}
+						{if $name === 'tail.select'}
+        					polyfills[{$id}] = tail.select("#{$id|noescape}", {\json_encode($configuration)|noescape});
+						{/if}
+						{if $name === 'tinymce'}
+        					polyfills[{$id}] = initTinyMCExconf("#{$id|noescape}", {\json_encode($configuration)|noescape});
+						{/if}
+					{/if}
+				{/foreach}
+			{/if}
+		{/foreach}
+    });
+</script>
+{/ifset}

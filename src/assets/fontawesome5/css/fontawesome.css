@@ -1,0 +1,163 @@
+.mce-fontawesome-5--content .mce-container-body > .mce-container,
+.mce-fontawesome-5--content .mce-container-body > .mce-container > .mce-container-body {
+    height: auto !important;
+    width: 670px;
+}
+
+.mce-fontawesome-5--content .mce-container-body > .mce-container {
+    position: static;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.mce-fontawesome-5--content-title {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    margin-top: 5px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    padding: 6px;
+    border-bottom: 1px solid transparent;
+}
+
+.mce-fontawesome-5--content .mce-icon-cell {
+    position: relative;
+    float: left;
+    width: 29px;
+    height: 29px;
+    cursor: pointer;
+}
+
+.mce-fontawesome-5--content .fas {
+    display: block;
+    line-height: 29px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 3px;
+}
+
+.mce-fontawesome-5--content .far {
+    display: block;
+    line-height: 29px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 3px;
+}
+
+.mce-fontawesome-5--content .fab {
+    display: block;
+    line-height: 29px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 3px;
+}
+
+.fas {
+    font-family: "Font Awesome\ 5 Free" !important;
+    font-weight: 900 !important;
+}
+.fab {
+    font-family: "Font Awesome 5 Brands" !important;
+    font-weight: 900 !important;
+}
+.far {
+    font-family: "Font Awesome\ 5 Free" !important;
+    font-weight: 400 !important;
+}
+.mce-fontawesome-5--search-container-clear .fas {
+    font-family: "Font Awesome\ 5 Free" !important;
+    font-weight: 900 !important;
+}
+.mce-fontawesome-5--content .fas:hover,
+.mce-fontawesome-5--content .fas:focus {
+    background-color: rgba(0,0,0,.1);
+}
+.mce-fontawesome-5--content .far:hover,
+.mce-fontawesome-5--content .far:focus {
+    background-color: rgba(0,0,0,.1);
+}
+
+.mce-fontawesome-5--content .fab:hover,
+.mce-fontawesome-5--content .fab:focus {
+    background-color: rgba(0,0,0,.1);
+}
+
+/* Search */
+.mce-fontawesome-5--search-container {
+    position: absolute;
+    margin: 10px 0 0 10px;
+}
+
+.mce-fontawesome-5--search-container-clear {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.mce-fontawesome-5--content-search .mce-fontawesome-5--search-container-clear {
+    display: block;
+}
+
+.mce-fontawesome-5--search-container-clear span {
+    line-height: 30px;
+    color: rgba(0,0,0,.4);
+}
+
+.mce-fontawesome-5--search-container-clear:hover span,
+.mce-fontawesome-5--search-container-clear:focus span {
+    color: rgba(0,0,0,.8);
+}
+
+.mce-fontawesome-5--search-container input {
+    display: block;
+    width: 200px;
+    height: 30px;
+    line-height: 30px;
+    margin: 0;
+    padding: 0 25px 0 25px;
+    border: 0 solid;
+    border-bottom: 1px solid rgba(0,0,0,.2);
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.mce-fontawesome-5--search-container input::-webkit-input-placeholder {
+    color: rgba(0,0,0,.4);
+}
+
+.mce-fontawesome-5--search-container input::-moz-placeholder {
+    color: rgba(0,0,0,.4);
+}
+
+.mce-fontawesome-5--search-container input:-ms-input-placeholder {
+    color: rgba(0,0,0,.4);
+}
+
+.mce-fontawesome-5--search-noresults {
+    text-align: center;
+    color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: calc(50% - 8px);
+}
+
+/* Toolbar icon */
+.mce-i-flag {
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-right: 1px;
+    position: relative;
+    top: 1px;
+}
+
+.mce-i-flag:before {
+    content: "\f024";
+}

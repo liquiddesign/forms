@@ -1,0 +1,7 @@
+{ifset $polyfills}
+{do $polyfills = Nette\Utils\Arrays::normalize($polyfills)}
+<link n:ifset="$polyfills['tail.select']" type="text/css" rel="stylesheet" href="{$nodeUrl}/tail.select/css/default/tail.select-light.css" />
+<link n:ifset="$polyfills['flatpickr']" type="text/css" rel="stylesheet" href="{$nodeUrl}/flatpickr/dist/flatpickr.css" />
+<link n:ifset="$polyfills['nouislider']" type="text/css" rel="stylesheet" href="{$nodeUrl}/nouislider/distribute/nouislider.css" />
+<link n:ifset="$polyfills['tinymce']" type="text/css" rel="stylesheet" href="{$nodeUrl}/@fortawesome/fontawesome-free/css/all.css" />
+{/ifset}
