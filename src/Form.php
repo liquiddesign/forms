@@ -65,12 +65,9 @@ class Form extends \Nette\Application\UI\Form
 		return $control;
 	}
 	
-	/**
-	 * Antispam protection.
-	 */
-	public function addAntispam(string $errorMessage): Antispam
+	public function addAntispam(string $errorMessage, float $timeThreshold = 1.0): Antispam
 	{
-		$control = new Antispam($errorMessage);
+		$control = new Antispam($errorMessage, $timeThreshold);
 		$this->addComponent($control, self::ANTISPAM_ID, \key((array) $this->getComponents()));
 
 		return $control;
