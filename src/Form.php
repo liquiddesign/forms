@@ -227,7 +227,7 @@ class Form extends \Nette\Application\UI\Form
 			$checkbox->setOmitted($ommited);
 		});
 		
-		/** @phpstan-ignore-next-line */
+		/* @phpstan-ignore-next-line */
 		$this->getForm()->onAnchor[] = function (Form $form): void {
 			foreach ($form->getMutations() as $mutation) {
 				if (!$form[self::MUTATION_TRANSLATOR_NAME][$mutation]->getValue()) {
