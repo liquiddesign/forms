@@ -279,7 +279,7 @@ class Form extends \Nette\Application\UI\Form
 
 	protected function setReadonlyForDescendant(\Nette\Forms\Container $container, string $mutation): void
 	{
-		unset($container, $mutation);
 		// TODO implement
+		unset($container, $mutation);
 	}
 }

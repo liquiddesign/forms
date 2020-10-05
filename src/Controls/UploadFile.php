@@ -65,6 +65,24 @@ class UploadFile extends \Nette\Forms\Controls\UploadControl implements ISignalR
 		
 		return $this;
 	}
+	
+	
+	public function upload(string $filenameFormat = '%1$s.%2$s'): ?string
+	{
+		$upload = $this->getValue();
+		$filename = null;
+		
+		if ($upload->isOk()) {
+			/** @var \Forms\Form $form */
+			$form = $this->getForm();
+			
+			$filename = \sprintf($filenameFormat, \pathinfo($upload->getSanitizedName(), \PATHINFO_BASENAME), \strtolower(\pathinfo($upload->getSanitizedName(), \PATHINFO_EXTENSION)));
+			$filepath = $form->getUserDir() . \DIRECTORY_SEPARATOR . $this->directory . \DIRECTORY_SEPARATOR . $filename;
+			$upload->move($filepath);
+		}
+		
+		return $filename;
+	}
 
 	public function signalReceived(string $signal): void
 	{
