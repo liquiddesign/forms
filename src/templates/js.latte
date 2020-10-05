@@ -4,7 +4,7 @@
 <script n:ifset="$polyfills['flatpickr']" src="{$nodeUrl}/flatpickr/dist/flatpickr.js"></script>
 <script n:ifset="$polyfills['nouislider']" src="{$nodeUrl}/nouislider/distribute/nouislider.js"></script>
 <script n:ifset="$polyfills['tinymce']" src="{$nodeUrl}/tinymce/tinymce.js"></script>
-<script n:ifset="$polyfills['tinymce']" src="{$baseUrl}/vendor/liquiddesign/tables/src/assets/tinymce.js"></script>
+<script n:ifset="$polyfills['tinymce']" src="{$baseUrl}/vendor/liquiddesign/forms/src/assets/tinymce.js"></script>
 
 <script>
     if (typeof baseUrl === 'undefined') {
@@ -15,7 +15,7 @@
 		var nodeUrl = {$nodeUrl};
     }
 
-    let extHomeUrl = {$baseUrl . '/vendor/liquiddesign/tables/src'};
+    let extHomeUrl = {$baseUrl . '/vendor/liquiddesign/forms/src'};
 
 	let polyfills = [];
     document.addEventListener("DOMContentLoaded", function(){
