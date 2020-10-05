@@ -27,10 +27,9 @@ class Wysiwyg extends TextArea implements ISignalReceiver
 		
 		$element = $this;
 		
-		/** @var \Forms\Form $form */
-		$form = $this->getForm();
-		
-		$this->monitor(Presenter::class, function ($presenter) use ($element, $form): void {
+		$this->monitor(Presenter::class, function ($presenter) use ($element): void {
+			/** @var \Forms\Form $form */
+			$form = $element->getForm();
 			
 			$link = $form->getPresenter()->link($this->getParent()->getName() . '-' . $this->getName() . '-save!');
 			
@@ -46,7 +45,7 @@ class Wysiwyg extends TextArea implements ISignalReceiver
 			$form->modifyPolyfillConfiguration('tinymce', $element->getHtmlId(), ['contentCss' => $contentCss ?? []]);
 		});
 	}
-
+	
 	public function signalReceived(string $signal): void
 	{
 		/** @var \Forms\Form $form */
