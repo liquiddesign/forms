@@ -99,6 +99,11 @@ class Forms
 		return $this->primaryMutation;
 	}
 	
+	public function getDefaultFlagsConfiguration(): array
+	{
+		return [$this->flagsPath, $this->flagsExt, $this->flagsMap];
+	}
+	
 	public function setDefaultFlagsConfiguration(?string $path, ?string $ext, array $flagsMap): void
 	{
 		$this->flagsPath = $path;
