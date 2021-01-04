@@ -35,8 +35,7 @@ class UploadFile extends \Nette\Forms\Controls\UploadControl implements ISignalR
 	public function __construct($label = null, ?string $directory = null, ?string $infoText = null)
 	{
 		parent::__construct($label, false);
-		
-		$this->addRule(\Nette\Forms\Form::IMAGE);
+
 		$this->infoText = $infoText;
 		$this->directory = $directory;
 		$this->deleteLink = Html::el('a')->setAttribute("class", 'btn btn-sm btn-danger button');
