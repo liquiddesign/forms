@@ -104,8 +104,8 @@ function initTinyMCExconf(selector, conf_override) {
         link_class_list: [
             {title: 'Žádné', value: ''},
             {title: 'LINK', value: 'link'},
-            {title: 'Button - primary', value: 'button button--primary'},
-            {title: 'Button - secondary', value: 'button button--secondary'},
+            {title: 'Button - primary', value: 'btn'},
+            {title: 'Button - secondary', value: 'btn btn-secondary'},
             // {title: 'Shadow hover', value: 'shadow-hover'},
         ],
         table_class_list: [
