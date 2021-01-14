@@ -13,7 +13,7 @@ $baseUrl = \dirname($container->getByType(\Nette\Http\Request::class)->getUrl(),
 $rootPath = \str_repeat('../', $rootLevel - 1);
 
 
-$configuration = $container->getByType(\Tables\ComponentFactory::class)->getWysiwygConfiguration('filemanager');
+$configuration = $container->getByType(\Forms\Forms::class)->getWysiwygConfiguration('filemanager');
 $directory = $configuration['directory'];
 $lang = $configuration['lang'];
 
