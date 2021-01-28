@@ -1,6 +1,7 @@
 {ifset $polyfills}
 {do $polyfills = Nette\Utils\Arrays::normalize($polyfills)}
 <script n:ifset="$polyfills['tail.select']" src="{$nodeUrl}/tail.select/js/tail.select.js"></script>
+<script n:ifset="$polyfills['tail.select']" src="{$baseUrl}/public/js/tail.select-cs.js"></script>
 <script n:ifset="$polyfills['flatpickr']" src="{$nodeUrl}/flatpickr/dist/flatpickr.js"></script>
 <script n:ifset="$polyfills['nouislider']" src="{$nodeUrl}/nouislider/distribute/nouislider.js"></script>
 <script n:ifset="$polyfills['tinymce']" src="{$nodeUrl}/tinymce/tinymce.js"></script>
