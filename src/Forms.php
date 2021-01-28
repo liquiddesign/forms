@@ -114,7 +114,6 @@ class Forms
 	public function createForm(): Form
 	{
 		$form = new Form();
-		$form->setTranslator($this->translator);
 		$form->setMutations($this->getDefaultMutations());
 		$form->setPrimaryMutation($this->getDefaultPrimaryMutation());
 		$form->setUserPaths(($this->context->getParameters()['wwwDir'] ?? '') . \DIRECTORY_SEPARATOR . $this->getDefaultUserDir(), $this->request->getUrl()->getBaseUrl() . $this->getDefaultUserDir());
