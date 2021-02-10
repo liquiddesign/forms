@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Forms;
 
 if (false) {
-	/** @deprecated use Nette\Forms\Control */
+	/** @deprecated use FormFactory */
 	class Forms extends FormFactory
 	{
 	}
