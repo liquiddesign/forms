@@ -107,9 +107,9 @@ class FormFactory
 		$this->flagsMap = $flagsMap;
 	}
 	
-	public function create($formClass = Form::class): Form
+	public function create(string $formClass = Form::class): Form
 	{
-		if (!\is_subclass_of($formClass, Form::class)) {
+		if ($formClass !== Form::class && !\is_subclass_of($formClass, Form::class)) {
 			throw new \InvalidArgumentException("$formClass is not child of Forms\\Form");
 		}
 		
