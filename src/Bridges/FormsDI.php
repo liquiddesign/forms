@@ -42,7 +42,7 @@ class FormsDI extends \Nette\DI\CompilerExtension
 		/** @var \Nette\DI\ContainerBuilder $builder */
 		$builder = $this->getContainerBuilder();
 		
-		$pages = $builder->addDefinition($this->prefix('componentFactory'))->setType(\Forms\Forms::class);
+		$pages = $builder->addDefinition($this->prefix('componentFactory'))->setType(\Forms\FormFactory::class);
 		$pages->addSetup('setDefaultMutations', [$config->mutations]);
 		$pages->addSetup('setDefaultUserDir', [$config->userDir]);
 		$pages->addSetup('setWysiwygConfiguration', [
