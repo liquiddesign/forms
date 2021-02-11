@@ -27,9 +27,9 @@ class FormFactory
 	
 	private ?string $flagsExt = null;
 	
-	private Container $context;
+	protected Container $context;
 	
-	private Request $request;
+	protected Request $request;
 	
 	/**
 	 * @var mixed[]
