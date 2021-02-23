@@ -128,7 +128,7 @@ class UploadImage extends \Nette\Forms\Controls\UploadControl implements ISignal
 		/** @var \Forms\Form $form */
 		$form = $this->getForm();
 		
-		$div = Html::el("div");
+		$div = Html::el("div")->setAttribute('id', $this->getHtmlId() . '-container')->setAttribute('class', 'upload-image-container');
 		
 		if ($this->filename) {
 			$link = $form->getPresenter()->link($this->getParent()->getName() . '-' . $this->getName() . '-delete!');
