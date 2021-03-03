@@ -59,7 +59,7 @@ class UploadImage extends \Nette\Forms\Controls\UploadControl implements ISignal
 			if ($element->thumbBaseUrl === null) {
 				$element->thumbBaseUrl = $form->getUserUrl() . ($this->directories ? '/' . \key($this->directories) : '');
 			}
-
+			
 			$element->deleteLink->setText($form->getTranslator() ? $form->getTranslator()->translate('delete') : 'delete');
 			
 			return;
@@ -76,7 +76,7 @@ class UploadImage extends \Nette\Forms\Controls\UploadControl implements ISignal
 		
 		return $this;
 	}
-
+	
 	public function signalReceived(string $signal): void
 	{
 		if (!$this->filename) {
@@ -91,7 +91,7 @@ class UploadImage extends \Nette\Forms\Controls\UploadControl implements ISignal
 		
 		/** @var \Nette\Application\UI\Form $form */
 		$form = $this->getForm();
-	
+		
 		if (!$form->getPresenter()->getRequest()->hasFlag(Request::RESTORED)) {
 			$this->onDelete($this->directories, $this->filename);
 		}
@@ -106,7 +106,7 @@ class UploadImage extends \Nette\Forms\Controls\UploadControl implements ISignal
 		if ($this->value !== null) {
 			return;
 		}
-
+		
 		$this->value = new FileUpload(null);
 	}
 	
@@ -114,6 +114,10 @@ class UploadImage extends \Nette\Forms\Controls\UploadControl implements ISignal
 	{
 		/** @var \Forms\Form $form */
 		$form = $this->getForm();
+		
+		if ($this->getHttpData(Form::DATA_TEXT) !== null) {
+			return $this->getHttpData(Form::DATA_TEXT);
+		}
 		
 		return self::uploadImage($this->getValue(), $form->getUserDir(), $this->directories, $filenameFormat);
 	}
@@ -131,15 +135,18 @@ class UploadImage extends \Nette\Forms\Controls\UploadControl implements ISignal
 		$div = Html::el("div")->setAttribute('id', $this->getHtmlId() . '-container')->setAttribute('class', 'upload-image-container');
 		
 		if ($this->filename) {
-			$link = $form->getPresenter()->link($this->getParent()->getName() . '-' . $this->getName() . '-delete!');
+			
+			$link = $form->getPresenter()->link($this->lookupPath() . '-delete!');
 			$this->deleteLink->setAttribute('href', $link);
 			
 			$src = $this->thumbBaseUrl . '/' . $this->filename . '?' . Random::generate();
 			$div->addHtml(Html::el('img')
 				->setAttribute('src', $src)
 				->setAttribute('style', $this->thumbSize !== null ? 'max-height:'.$this->thumbSize.'px; max-width:'.$this->thumbSize.'px;' : 0));
+			$div->addHtml(parent::getControl()->setType('hidden')->setValue($this->filename));
 			
 			$div->addHtml($this->deleteLink);
+			
 		} else {
 			$div->addHtml(parent::getControl());
 		}
@@ -150,7 +157,7 @@ class UploadImage extends \Nette\Forms\Controls\UploadControl implements ISignal
 		
 		return $div;
 	}
-
+	
 	protected static function uploadImage(FileUpload $upload, string $userDir, array $directories, string $filenameFormat = '%1$s.%2$s'): ?string
 	{
 		if ($upload->isOk() && $upload->isImage()) {

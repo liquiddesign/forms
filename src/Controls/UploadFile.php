@@ -35,7 +35,7 @@ class UploadFile extends \Nette\Forms\Controls\UploadControl implements ISignalR
 	public function __construct($label = null, ?string $directory = null, ?string $infoText = null)
 	{
 		parent::__construct($label, false);
-
+		
 		$this->infoText = $infoText;
 		$this->directory = $directory;
 		$this->deleteLink = Html::el('a')->setAttribute("class", 'btn btn-sm btn-danger button');
@@ -71,6 +71,10 @@ class UploadFile extends \Nette\Forms\Controls\UploadControl implements ISignalR
 		$upload = $this->getValue();
 		$filename = null;
 		
+		if ($this->getHttpData(Form::DATA_TEXT) !== null) {
+			return $this->getHttpData(Form::DATA_TEXT);
+		}
+		
 		if ($upload->isOk()) {
 			/** @var \Forms\Form $form */
 			$form = $this->getForm();
@@ -82,7 +86,7 @@ class UploadFile extends \Nette\Forms\Controls\UploadControl implements ISignalR
 		
 		return $filename;
 	}
-
+	
 	public function signalReceived(string $signal): void
 	{
 		if (!$this->filename) {
@@ -102,7 +106,7 @@ class UploadFile extends \Nette\Forms\Controls\UploadControl implements ISignalR
 			$filePath = $form->getUserDir() . \DIRECTORY_SEPARATOR . ($this->directory ? $this->directory . \DIRECTORY_SEPARATOR : '') . $this->filename;
 			$form->getPresenter()->sendResponse(new FileResponse($filePath));
 		}
-
+		
 		$class = static::class;
 		
 		throw new BadSignalException("Missing handler for signal '$signal' in $class.");
@@ -115,7 +119,7 @@ class UploadFile extends \Nette\Forms\Controls\UploadControl implements ISignalR
 		if ($this->value !== null) {
 			return;
 		}
-
+		
 		$this->value = new FileUpload(null);
 	}
 	
@@ -137,13 +141,14 @@ class UploadFile extends \Nette\Forms\Controls\UploadControl implements ISignalR
 		$div = Html::el("div");
 		
 		if ($this->filename) {
-			$deleteLink = $form->getPresenter()->link($this->getParent()->getName() . '-' . $this->getName() . '-delete!');
-			$downloadLink = $form->getPresenter()->link($this->getParent()->getName() . '-' . $this->getName() . '-download!');
+			$deleteLink = $form->getPresenter()->link($this->lookupPath() . '-delete!');
+			$downloadLink = $form->getPresenter()->link($this->lookupPath() . '-' . $this->getName() . '-download!');
 			
 			$this->downloadLink->setAttribute('href', $downloadLink)->setText($this->filename);
 			$this->deleteLink->setAttribute('href', $deleteLink);
 			
 			$div->addHtml($this->downloadLink);
+			$div->addHtml(parent::getControl()->setType('hidden')->setValue($this->filename));
 			$div->addHtml($this->deleteLink);
 		} else {
 			$div->addHtml(parent::getControl());
