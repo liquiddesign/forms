@@ -19,7 +19,7 @@ class Form extends \Nette\Application\UI\Form
 	use ComponentsTrait;
 	
 	public const MUTATION_SELECTOR_NAME = '__MUTATION_SELECTOR';
-	public const MUTATION_TRANSLATOR_NAME = '__MUTATION_TRANSLATED';
+	public const MUTATION_TRANSLATOR_NAME = 'active';
 	public const ANTISPAM_ID = '_antispam_';
 	
 	protected ?string $flagsPath = null;
@@ -50,7 +50,7 @@ class Form extends \Nette\Application\UI\Form
 	public function __construct(?\Nette\ComponentModel\IContainer $parent = null, ?string $name = null)
 	{
 		parent::__construct($parent, $name);
-
+		
 		$this->setRenderer(new DefaultRenderer());
 	}
 	
@@ -61,7 +61,7 @@ class Form extends \Nette\Application\UI\Form
 	{
 		$control = new DoubleClickProtection($errorMessage);
 		$this->addComponent($control, self::PROTECTOR_ID, \key((array) $this->getComponents()));
-
+		
 		return $control;
 	}
 	
@@ -69,10 +69,10 @@ class Form extends \Nette\Application\UI\Form
 	{
 		$control = new Antispam($errorMessage, $timeThreshold);
 		$this->addComponent($control, self::ANTISPAM_ID, \key((array) $this->getComponents()));
-
+		
 		return $control;
 	}
-
+	
 	public function addPolyfill(string $name, string $id, ?array $configuration): void
 	{
 		if (!isset($this->polyfills[$name])) {
@@ -87,7 +87,7 @@ class Form extends \Nette\Application\UI\Form
 		if (!isset($this->polyfills[$name][$id]) && !\is_array($this->polyfills[$name][$id])) {
 			return false;
 		}
-	
+		
 		$this->polyfills[$name][$id] = \array_merge($this->polyfills[$name][$id], $configuration);
 		
 		return true;
@@ -181,7 +181,7 @@ class Form extends \Nette\Application\UI\Form
 		if (!$flagsMap) {
 			return;
 		}
-
+		
 		$this->flagsMap = $flagsMap;
 	}
 	
@@ -212,24 +212,34 @@ class Form extends \Nette\Application\UI\Form
 			->setHtmlAttribute('onclick', 'formChangeMutation(this.form, this.value)');
 	}
 	
-	public function addTranslatedCheckbox(string $label, $ommited = true): void
+	public function addTranslatedCheckbox(string $label, string $name = self::MUTATION_TRANSLATOR_NAME, bool $omitted = false, bool $forcePrimary = true): void
 	{
-		$localeContainer = $this->addLocaleCheckbox(self::MUTATION_TRANSLATOR_NAME, $label)->forSecondary(function (Checkbox $checkbox, $mutation): void {
-			$checkbox->setHtmlAttribute('onclick', 'formDisableMutation(this.form,"'.$mutation.'")');
-		})->forPrimary(function (Checkbox $checkbox): void {
-			$checkbox->setValue(true)->setHtmlAttribute('style', 'display: none;')->setCaption('Defaultni jazyk je aktivni');
+		$localeContainer = $this->addLocaleCheckbox($name, $label)->forPrimary(function (Checkbox $checkbox, $mutation) use ($forcePrimary): void {
+			$checkbox->setDefaultValue(true);
+			
+			if ($forcePrimary) {
+				$checkbox->setHtmlAttribute('style', 'display:none;');
+				$checkbox->getLabelPrototype()->setAttribute('style', 'position: relative; left: -1.25rem');
+			} else {
+				$checkbox->setHtmlAttribute('onclick', 'formDisableMutation(this.form,"'.$mutation.'","'.self::MUTATION_TRANSLATOR_NAME.'")');
+			}
 		});
 		
-		$localeContainer->forAll(function (Checkbox $checkbox) use ($ommited): void {
-			$checkbox->setOmitted($ommited);
+		$localeContainer->forAll(function (Checkbox $checkbox, $mutation) use ($omitted): void {
+			$checkbox->setHtmlAttribute('data-flag', '0');
+			$checkbox->setOmitted($omitted);
+		});
+		
+		$localeContainer->forSecondary(function (Checkbox $checkbox, $mutation) use ($omitted): void {
+			$checkbox->setHtmlAttribute('onclick', 'formDisableMutation(this.form,"'.$mutation.'","'.self::MUTATION_TRANSLATOR_NAME.'")');
 		});
 		
 		/* @phpstan-ignore-next-line */
-		$this->getForm()->onAnchor[] = function (Form $form): void {
+		$this->getForm()->onAnchor[] = function (Form $form) use ($name): void {
 			foreach ($form->getMutations() as $mutation) {
-				if (!$form[self::MUTATION_TRANSLATOR_NAME][$mutation]->getValue()) {
+				if (!$form[$name][$mutation]->getValue()) {
 					foreach ($form->getComponents(true) as $component) {
-						if ($component instanceof LocaleContainer && $component->getName() !== self::MUTATION_TRANSLATOR_NAME) {
+						if ($component instanceof LocaleContainer && $component->getName() !== $name) {
 							/** @var \Nette\Forms\Controls\BaseControl $control */
 							$control = $component[$mutation];
 							$control->setDisabled();
@@ -253,7 +263,7 @@ class Form extends \Nette\Application\UI\Form
 	{
 		$control = new Container();
 		$control->currentGroup = $this->currentGroup;
-
+		
 		if ($this->currentGroup !== null) {
 			$this->currentGroup->add($control);
 		}
@@ -273,7 +283,7 @@ class Form extends \Nette\Application\UI\Form
 			unset($component);
 		}
 	}
-
+	
 	protected function setReadonlyForDescendant(\Nette\Forms\Container $container, string $mutation): void
 	{
 		// TODO implement

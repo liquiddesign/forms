@@ -8,20 +8,18 @@ document.addEventListener("DOMContentLoaded", function(event)
             el.form.querySelector("input[name=__MUTATION_SELECTOR][value=" + el.getAttribute('data-mutation') + "]").click();
         };
     }
-
-    initForms();
 });
 
 function formChangeMutation(form, mutation)
 {
     b = form.querySelectorAll("tr[data-mutation]");
     for (var j in b) if (b.hasOwnProperty(j)) {
-        b[j].style.display = 'none';
+        b[j].classList.add("inactive");
     }
 
     b = form.querySelectorAll("tr[data-mutation='" + mutation + "']");
     for (var j in b) if (b.hasOwnProperty(j)) {
-        b[j].style.display = 'table-row';
+        b[j].classList.remove("inactive");
     }
 
     formDisableMutation(form, mutation);
@@ -37,8 +35,8 @@ function formGetMutation(form) {
     return null;
 }
 
-function formIsMutationsActive(form, mutation) {
-    let mutationTranslated = form.querySelector("input[name=__MUTATION_TRANSLATED\\["+ mutation +"\\]]");
+function formIsMutationsActive(form, mutation, translatorName = 'active') {
+    let mutationTranslated = form.querySelector("input[name=" + translatorName + "\\["+ mutation +"\\]]");
 
     if (mutationTranslated) {
         return mutationTranslated.checked;
@@ -56,33 +54,28 @@ function formGetAvailbleMutations(form) {
     return mutations;
 }
 
-function initForms() {
-    b = document.querySelectorAll("form");
+function formDisableMutation(form, mutation, translatorName = 'active') {
 
-    for (var j in b) if (b.hasOwnProperty(j)) {
-       var mutation = formGetMutation(b[j]);
-       if (mutation !== null) {
-           formDisableMutation(b[j], mutation);
-       }
-    }
-}
-
-
-function formDisableMutation(form, mutation) {
-
-    let isActive = formIsMutationsActive(form, mutation);
-    console.log(isActive);
+    let isActive = formIsMutationsActive(form, mutation, translatorName);
 
     b = form.querySelectorAll("tr[data-mutation='" + mutation + "']");
+
     for (var j in b) if (b.hasOwnProperty(j)) {
 
-        if (!b[j].querySelector("input[name=__MUTATION_TRANSLATED\\["+ mutation +"\\]]")) {
-            b[j].style.display = !isActive ? 'none' : 'table-row';
-
+        if (!b[j].querySelector("input[name=active\\["+ mutation +"\\]]")) {
             var nodes =  b[j].getElementsByTagName('*');
             for(var i = 0; i < nodes.length; i++){
                 nodes[i].disabled = !isActive;
             }
         }
     }
+
+    b = form.querySelectorAll("fieldset");
+
+    for (var j in b) if (b.hasOwnProperty(j)) {
+        if (j != 0 && j != b.length - 1) {
+            b[j].style.display = !isActive ? 'none' : 'block';
+        }
+    }
+
 }

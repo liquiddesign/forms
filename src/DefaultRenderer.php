@@ -38,6 +38,7 @@ class DefaultRenderer extends DefaultFormRenderer
 					
 					$pair->setAttribute('data-mutation', $controlMutation);
 					
+					
 					if ($controlMutation !== $activeMutation && $activeMutation !== null) {
 						$pair->hidden(true);
 					}
@@ -54,9 +55,11 @@ class DefaultRenderer extends DefaultFormRenderer
 		
 		if ($control instanceof BaseControl && $form = $control->getForm()) {
 			if ($form instanceof Form) {
-				$controlMutation = $control->getControlPrototype()->getAttribute('data-mutation');
 				
-				if ($controlMutation) {
+				$controlMutation = $control->getControlPrototype()->getAttribute('data-mutation');
+				$showFlag = $control->getControlPrototype()->getAttribute('data-flag') ?? true;
+				
+				if ($controlMutation && $showFlag) {
 					$src = $form->getFlagSrc($controlMutation);
 					
 					$html->addHtml("&nbsp; <img class=mutation-flag src=$src alt=$controlMutation title=$controlMutation>");

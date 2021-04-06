@@ -31,11 +31,22 @@ trait LocaleComponentsTrait
 		return $this instanceof Form ? $this : $this->lookup(Form::class, $throw);
 	}
 	
+	public function setRequired(bool $required = true)
+	{
+		foreach ($this->getForm()->getMutations() as $mutation) {
+			if (isset($this->getParent()[Form::MUTATION_TRANSLATOR_NAME][$mutation])) {
+				$this[$mutation]->addConditionOn($this->getParent()[Form::MUTATION_TRANSLATOR_NAME][$mutation], Form::EQUAL, true)->setRequired($required);
+			} else {
+				$this[$mutation]->setRequired($required);
+			}
+		}
+	}
+	
 	protected function addLocaleContainer(string $name): LocaleContainer
 	{
 		$control = new LocaleContainer();
 		$control->currentGroup = $this->currentGroup;
-
+		
 		if ($this->currentGroup !== null) {
 			$this->currentGroup->add($control);
 		}
