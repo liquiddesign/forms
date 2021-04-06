@@ -41,6 +41,8 @@ function formIsMutationsActive(form, mutation, translatorName = 'active') {
     if (mutationTranslated) {
         return mutationTranslated.checked;
     }
+
+    return null;
 }
 
 function formGetAvailbleMutations(form) {
@@ -57,12 +59,13 @@ function formGetAvailbleMutations(form) {
 function formDisableMutation(form, mutation, translatorName = 'active') {
 
     let isActive = formIsMutationsActive(form, mutation, translatorName);
-
+    console.log(isActive);
     b = form.querySelectorAll("tr[data-mutation='" + mutation + "']");
 
     for (var j in b) if (b.hasOwnProperty(j)) {
+        console.log(b[j].querySelector("input[name=active\\["+ mutation +"\\]]"));
+        if (!b[j].querySelector("input[name=active\\["+ mutation +"\\]]") && isActive !== null) {
 
-        if (!b[j].querySelector("input[name=active\\["+ mutation +"\\]]")) {
             var nodes =  b[j].getElementsByTagName('*');
             for(var i = 0; i < nodes.length; i++){
                 nodes[i].disabled = !isActive;
@@ -77,5 +80,4 @@ function formDisableMutation(form, mutation, translatorName = 'active') {
             b[j].style.display = !isActive ? 'none' : 'block';
         }
     }
-
 }
