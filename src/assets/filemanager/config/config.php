@@ -13,13 +13,9 @@ $url = $container->getByType(\Nette\Http\Request::class)->getUrl();
 $baseUrl = $url->getScheme() . '://' . $url->getHost();
 $rootPath = \str_repeat('../', $rootLevel - 1);
 
-$rootPath = \dirname($container->getParameters()['wwwDir'], 6) . '/';
-$rootUrl = \dirname($url->getPath(), 7) . '/';
+$rootPath = \dirname($container->getParameters()['wwwDir'], $rootLevel - 1) . '/';
+$rootUrl = \dirname($url->getPath(), $rootLevel) === '/' ? '/' :  \dirname($url->getPath(), $rootLevel) . '/';
 
-var_dump($rootPath);
-var_dump($rootUrl);
-
-die();
 
 $configuration = $container->getByType(\Forms\Forms::class)->getWysiwygConfiguration('filemanager');
 $directory = $configuration['directory'];
@@ -130,7 +126,7 @@ $config = array(
 	| DO NOT put inside upload folder
 	|
 	*/
-	'thumbs_base_path' => $rootPath .'/'.$directory.'/tinythumbs/',
+	'thumbs_base_path' => $rootUrl .$directory.'/tinythumbs/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -141,7 +137,7 @@ $config = array(
 	| DO NOT put inside upload folder
 	|
 	*/
-	'thumbs_upload_dir' => $rootPath . $directory . '/tinythumbs/',
+	'thumbs_upload_dir' => $rootUrl . $directory . '/tinythumbs/',
 
 
 	/*
