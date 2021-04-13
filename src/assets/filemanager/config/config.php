@@ -11,11 +11,8 @@ $container = App\Bootstrap::boot()->createContainer();
 
 $url = $container->getByType(\Nette\Http\Request::class)->getUrl();
 $baseUrl = $url->getScheme() . '://' . $url->getHost();
-$rootPath = \str_repeat('../', $rootLevel - 1);
-
-$rootPath = \dirname($container->getParameters()['wwwDir'], $rootLevel - 1) . '/';
 $rootUrl = \dirname($url->getPath(), $rootLevel) === '/' ? '/' :  \dirname($url->getPath(), $rootLevel) . '/';
-
+$relativePath = \str_repeat('../', $rootUrl === '/' ? $rootLevel : $rootLevel - 1);
 
 $configuration = $container->getByType(\Forms\Forms::class)->getWysiwygConfiguration('filemanager');
 $directory = $configuration['directory'];
@@ -106,7 +103,7 @@ $config = array(
 	| with start and final /
 	|
 	*/
-	'upload_dir' => $local === true ? '/'.\explode('/', $_SERVER['REQUEST_URI'])[1] . '/'.$directory.'/tinyuploads/' : '/'.$directory.'/tinyuploads/',
+	'upload_dir' => $rootUrl. $directory. '/tinyuploads/',
 	/*
 	|--------------------------------------------------------------------------
 	| relative path from filemanager folder to upload folder
@@ -115,7 +112,7 @@ $config = array(
 	| with final /
 	|
 	*/
-	'current_path' => $rootPath . $directory . '/tinyuploads/',
+	'current_path' => $relativePath . $directory . '/tinyuploads/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -126,7 +123,7 @@ $config = array(
 	| DO NOT put inside upload folder
 	|
 	*/
-	'thumbs_base_path' => $rootUrl .'/'.$directory.'/tinythumbs/',
+	'thumbs_base_path' => $relativePath .$directory.'/tinythumbs/',
 
 	/*
 	|--------------------------------------------------------------------------
