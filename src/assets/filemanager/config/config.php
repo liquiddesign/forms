@@ -22,8 +22,6 @@ if (!$configuration['isAllowed']) {
 	die('Permission denied');
 }
 
-$local = true;
-
 if (session_id() === '') {
 	session_start();
 }
@@ -123,7 +121,7 @@ $config = array(
 	| DO NOT put inside upload folder
 	|
 	*/
-	'thumbs_base_path' => $relativePath .$directory.'/tinythumbs/',
+	'thumbs_base_path' => $relativePath . $directory.'/tinythumbs/',
 
 	/*
 	|--------------------------------------------------------------------------
