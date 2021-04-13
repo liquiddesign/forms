@@ -13,6 +13,14 @@ $url = $container->getByType(\Nette\Http\Request::class)->getUrl();
 $baseUrl = $url->getScheme() . '://' . $url->getHost();
 $rootPath = \str_repeat('../', $rootLevel - 1);
 
+$rootPath = \dirname($container->getParameters()['wwwDir'], 6) . '/';
+$rootUrl = \dirname($url->getPath(), 7) . '/';
+
+dump($rootPath);
+dump($rootUrl);
+
+die();
+
 $configuration = $container->getByType(\Forms\Forms::class)->getWysiwygConfiguration('filemanager');
 $directory = $configuration['directory'];
 $lang = $configuration['lang'];
