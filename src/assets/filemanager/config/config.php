@@ -9,12 +9,9 @@ require \dirname(__DIR__, $rootLevel) . '/vendor/autoload.php';
 $container = App\Bootstrap::boot()->createContainer();
 \Tracy\Debugger::$showBar = false;
 
-$baseUrl = \dirname($container->getByType(\Nette\Http\Request::class)->getUrl(), $rootLevel + 1);
+$url = $container->getByType(\Nette\Http\Request::class)->getUrl();
+$baseUrl = $url->getScheme() . '://' . $url->getHost();
 $rootPath = \str_repeat('../', $rootLevel - 1);
-var_dump((string) $container->getByType(\Nette\Http\Request::class)->getUrl()->withPath('')->withQuery([])->withFragment(''));
-var_dump($container->getByType(\Nette\Http\Request::class)->getUrl()->getScheme() . '://' . $container->getByType(\Nette\Http\Request::class)->getUrl()->getHost());
-var_dump((string) $baseUrl);
-die();
 
 $configuration = $container->getByType(\Forms\Forms::class)->getWysiwygConfiguration('filemanager');
 $directory = $configuration['directory'];
