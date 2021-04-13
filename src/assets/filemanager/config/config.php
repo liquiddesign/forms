@@ -10,8 +10,11 @@ $container = App\Bootstrap::boot()->createContainer();
 \Tracy\Debugger::$showBar = false;
 
 $baseUrl = \dirname($container->getByType(\Nette\Http\Request::class)->getUrl(), $rootLevel + 1);
-$rootPath = '/';// .\str_repeat('../', $rootLevel - 1);
-die($baseUrl);
+$rootPath = \str_repeat('../', $rootLevel - 1);
+var_dump((string) $container->getByType(\Nette\Http\Request::class)->getUrl()->withPath('')->withQuery([])->withFragment(''));
+var_dump($container->getByType(\Nette\Http\Request::class)->getUrl()->getScheme() . '://' . $container->getByType(\Nette\Http\Request::class)->getUrl()->getHost());
+var_dump((string) $baseUrl);
+die();
 
 $configuration = $container->getByType(\Forms\Forms::class)->getWysiwygConfiguration('filemanager');
 $directory = $configuration['directory'];
