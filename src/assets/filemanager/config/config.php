@@ -10,7 +10,7 @@ $container = App\Bootstrap::boot()->createContainer();
 \Tracy\Debugger::$showBar = false;
 
 $baseUrl = \dirname($container->getByType(\Nette\Http\Request::class)->getUrl(), $rootLevel + 1);
-$rootPath = \str_repeat('../', $rootLevel - 1);
+$rootPath = '/' .\str_repeat('../', $rootLevel - 1);
 
 
 $configuration = $container->getByType(\Forms\Forms::class)->getWysiwygConfiguration('filemanager');
