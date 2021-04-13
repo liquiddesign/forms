@@ -16,8 +16,8 @@ $rootPath = \str_repeat('../', $rootLevel - 1);
 $rootPath = \dirname($container->getParameters()['wwwDir'], 6) . '/';
 $rootUrl = \dirname($url->getPath(), 7) . '/';
 
-dump($rootPath);
-dump($rootUrl);
+var_dump($rootPath);
+var_dump($rootUrl);
 
 die();
 
