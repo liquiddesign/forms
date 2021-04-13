@@ -126,7 +126,7 @@ $config = array(
 	| DO NOT put inside upload folder
 	|
 	*/
-	'thumbs_base_path' => $rootUrl .$directory.'/tinythumbs/',
+	'thumbs_base_path' => $rootUrl .'/'.$directory.'/tinythumbs/',
 
 	/*
 	|--------------------------------------------------------------------------
