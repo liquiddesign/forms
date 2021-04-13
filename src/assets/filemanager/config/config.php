@@ -12,16 +12,19 @@ $container = App\Bootstrap::boot()->createContainer();
 $url = $container->getByType(\Nette\Http\Request::class)->getUrl();
 $baseUrl = $url->getScheme() . '://' . $url->getHost();
 $rootUrl = \dirname($url->getPath(), $rootLevel) === '/' ? '/' :  \dirname($url->getPath(), $rootLevel) . '/';
-$relativePath = \str_repeat('../', $rootUrl === '/' ? $rootLevel : $rootLevel - 1);
-
-var_dump($baseUrl);
-var_dump($rootUrl);
-var_dump($relativePath);
-die();
+$relativePath = \str_repeat('../', $rootLevel - 1);
 
 $configuration = $container->getByType(\Forms\Forms::class)->getWysiwygConfiguration('filemanager');
 $directory = $configuration['directory'];
 $lang = $configuration['lang'];
+
+var_dump($baseUrl);
+var_dump($rootUrl);
+var_dump($relativePath);
+var_dump($relativePath . $directory . '/tinyuploads/');
+
+var_dump(is_dir($relativePath . $directory . '/tinyuploads/'));
+die();
 
 if (!$configuration['isAllowed']) {
 	die('Permission denied');
