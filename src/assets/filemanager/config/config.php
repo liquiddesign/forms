@@ -12,7 +12,7 @@ $container = App\Bootstrap::boot()->createContainer();
 $url = $container->getByType(\Nette\Http\Request::class)->getUrl();
 $baseUrl = $url->getScheme() . '://' . $url->getHost();
 $rootUrl = \dirname($url->getPath(), $rootLevel) === '/' ? '/' :  \dirname($url->getPath(), $rootLevel) . '/';
-$relativePath = \str_repeat('../', $rootUrl === '/' ? $rootLevel : $rootLevel - 1);
+$relativePath = \str_repeat('../', $rootUrl === '/' ? $rootLevel - 2 : $rootLevel - 1);
 
 $configuration = $container->getByType(\Forms\Forms::class)->getWysiwygConfiguration('filemanager');
 $directory = $configuration['directory'];
