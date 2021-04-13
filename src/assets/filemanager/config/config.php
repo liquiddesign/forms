@@ -17,14 +17,14 @@ $relativePath = \str_repeat('../', $rootLevel - 1);
 $configuration = $container->getByType(\Forms\Forms::class)->getWysiwygConfiguration('filemanager');
 $directory = $configuration['directory'];
 $lang = $configuration['lang'];
-
+/*
 var_dump($baseUrl);
 var_dump($rootUrl);
 var_dump($relativePath);
 var_dump($relativePath . $directory . '/tinyuploads/');
 
 var_dump(is_dir($relativePath . $directory . '/tinyuploads/'));
-die();
+die();*/
 
 if (!$configuration['isAllowed']) {
 	die('Permission denied');
