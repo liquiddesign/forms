@@ -11,7 +11,7 @@ $container = App\Bootstrap::boot()->createContainer();
 
 $baseUrl = \dirname($container->getByType(\Nette\Http\Request::class)->getUrl(), $rootLevel + 1);
 $rootPath = '/';// .\str_repeat('../', $rootLevel - 1);
-
+die($baseUrl);
 
 $configuration = $container->getByType(\Forms\Forms::class)->getWysiwygConfiguration('filemanager');
 $directory = $configuration['directory'];
