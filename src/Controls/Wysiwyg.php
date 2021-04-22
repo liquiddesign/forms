@@ -34,16 +34,11 @@ class Wysiwyg extends TextArea implements ISignalReceiver
 			
 			$link = $form->getPresenter()->link($this->getParent()->getName() . '-' . $this->getName() . '-save!');
 			
-			$templates = $presenter->context->getByType(FormFactory::class)->getWysiwygConfiguration('templates');
-			$contentCss = $presenter->context->getByType(FormFactory::class)->getWysiwygConfiguration('contentCss');
-			
 			if (!\count($element->onSave)) {
 				$form->modifyPolyfillConfiguration('tinymce', $element->getHtmlId(), ['save' => false]);
 			}
 			
 			$form->modifyPolyfillConfiguration('tinymce', $element->getHtmlId(), ['saveLink' => $link]);
-			$form->modifyPolyfillConfiguration('tinymce', $element->getHtmlId(), ['templates' => $templates ?? []]);
-			$form->modifyPolyfillConfiguration('tinymce', $element->getHtmlId(), ['contentCss' => $contentCss ?? []]);
 		});
 	}
 	

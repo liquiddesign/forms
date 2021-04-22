@@ -31,6 +31,11 @@ class Form extends \Nette\Application\UI\Form
 	 */
 	protected array $flagsMap = [];
 	
+	protected array $wysiwygConfiguration = [
+		'contentCss' => [],
+		'templates' => [],
+	];
+	
 	protected string $userUrl;
 	
 	protected string $userDir;
@@ -157,6 +162,18 @@ class Form extends \Nette\Application\UI\Form
 		$this->userDir = $userDir;
 		$this->userUrl = $userUrl;
 	}
+	
+	public function setWysiwygConfiguration(array $contentCss, array $templates): void
+	{
+		$this->wysiwygConfiguration['contentCss'] = $contentCss;
+		$this->wysiwygConfiguration['templates'] = $templates;
+	}
+	
+	public function getWysiwygConfiguration(): array
+	{
+		return $this->wysiwygConfiguration;
+	}
+	
 	
 	public function getUserDir(): string
 	{

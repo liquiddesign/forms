@@ -118,6 +118,7 @@ class FormFactory
 		$form->setPrimaryMutation($this->getDefaultPrimaryMutation());
 		$form->setUserPaths(($this->context->getParameters()['wwwDir'] ?? '') . \DIRECTORY_SEPARATOR . $this->getDefaultUserDir(), $this->request->getUrl()->getBaseUrl() . $this->getDefaultUserDir());
 		$form->setFlagsConfiguration($this->request->getUrl()->getBaseUrl() . $this->flagsPath, $this->flagsExt, $this->flagsMap);
+		$form->setWysiwygConfiguration($this->wysiwygConfiguration['contentCss'] ?? [], $this->wysiwygConfiguration['templates'] ?? []);
 		
 		return $form;
 	}

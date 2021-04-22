@@ -23,11 +23,11 @@ trait ComponentsTrait
 		$textarea = $this[$name] = (new Wysiwyg($label));
 		
 		$init = [
-			'height' => 400,
-			'width' => 1024,
-			'insertcontent' => $textarea->getParent() instanceof LocaleContainer,
-			'save' => true,
-		];
+				'height' => 400,
+				'width' => 1024,
+				'insertcontent' => $textarea->getParent() instanceof LocaleContainer,
+				'save' => true,
+			] + $this->getForm()->getWysiwygConfiguration();
 		
 		$this->getForm()->addPolyfill('tinymce', $textarea->getHtmlId(), $configuration + $init);
 		$textarea->setHtmlAttribute('class', 'tinymce');
