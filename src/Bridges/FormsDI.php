@@ -49,7 +49,7 @@ class FormsDI extends \Nette\DI\CompilerExtension
 			(array) $config->wysiwyg->filemanager,
 			(array) $config->wysiwyg->widgets,
 			(array) $config->wysiwyg->contentCss,
-			(array) $config->wysiwyg->templates,
+			$config->wysiwyg->templates,
 			]);
 		$pages->addSetup('setDefaultFlagsConfiguration', [$config->flagsPath, $config->flagsExt, $config->flagsMap]);
 		$pages->addSetup('setDefaultPrimaryMutation', [$config->primaryMutation ?: \current($config->mutations)]);
