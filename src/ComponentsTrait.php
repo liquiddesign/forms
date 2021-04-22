@@ -24,7 +24,7 @@ trait ComponentsTrait
 		
 		$init = [
 			'height' => 400,
-			'width' => 860,
+			'width' => 1024,
 			'insertcontent' => $textarea->getParent() instanceof LocaleContainer,
 			'save' => true,
 		];
@@ -39,7 +39,7 @@ trait ComponentsTrait
 	{
 		$init = [
 			'height' => 150,
-			'width' => 860,
+			'width' => 1024,
 			'plugins' => ["autolink link"],
 			'toolbar1' => "undo redo | styleselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | link unlink anchor | copy cut paste pastetext insertcontent",
 			'toolbar2' => "",
