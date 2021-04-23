@@ -130,19 +130,23 @@ function initTinyMCExconf(selector, conf_override) {
         valid_elements : "@[style],a[href|target],strong/b,em/i,span,br[*],p,*[*]",
         valid_children: '+p[br],+p[span],+p[script]',
         extended_valid_elements: 'span[class|style],iframe[src|style|width|height|scrolling|marginwidth|marginheight|frameborder|allowfullscreen],script[src|async|charset]',
-        setup: function (editor) {
-            editor.addButton('deleteLayout', {
-                icon : 'awesome fas fa-trash-alt',
-                tooltip: "Smazat layout",
-                onclick: function () {
-                    var element = tinymce.activeEditor.selection.getNode();
-                    var component = element.closest('.tiny-component');
-                    if (component) {
-                        component.remove();
-                    }
-                }
-            });
-        },
+		setup: function (editor) {
+			editor.addButton('deleteLayout', {
+				icon : 'awesome fas fa-trash-alt',
+				tooltip: "Smazat layout",
+				onclick: function () {
+					const element = tinymce.activeEditor.selection.getNode();
+					const component = element.closest('.tiny-component');
+					if (component) {
+						const paragraphTag = document.createElement('p');
+						const breakTag = document.createElement('br');
+						paragraphTag.appendChild(breakTag);
+						console.log(paragraphTag);
+						component.replaceWith(paragraphTag);
+					}
+				}
+			});
+		},
     };
 
     // Override configuration if needed
