@@ -59,13 +59,11 @@ function formGetAvailbleMutations(form) {
 function formDisableMutation(form, mutation, translatorName = 'active') {
 
     let isActive = formIsMutationsActive(form, mutation, translatorName);
-    console.log(isActive);
+
     b = form.querySelectorAll("tr[data-mutation='" + mutation + "']");
 
     for (var j in b) if (b.hasOwnProperty(j)) {
-        console.log(b[j].querySelector("input[name=active\\["+ mutation +"\\]]"));
         if (!b[j].querySelector("input[name=active\\["+ mutation +"\\]]") && isActive !== null) {
-
             var nodes =  b[j].getElementsByTagName('*');
             for(var i = 0; i < nodes.length; i++){
                 nodes[i].disabled = !isActive;
@@ -77,7 +75,7 @@ function formDisableMutation(form, mutation, translatorName = 'active') {
 
     for (var j in b) if (b.hasOwnProperty(j)) {
         if (j != 0 && j != b.length - 1) {
-            b[j].style.display = !isActive ? 'none' : 'block';
+            b[j].style.display = !isActive && isActive !== null ? 'none' : 'block';
         }
     }
 }
