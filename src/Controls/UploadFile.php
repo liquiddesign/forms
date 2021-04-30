@@ -100,6 +100,8 @@ class UploadFile extends \Nette\Forms\Controls\UploadControl implements ISignalR
 			if (!$form->getPresenter()->getRequest()->hasFlag(Request::RESTORED)) {
 				$this->onDelete($this->directory, $this->filename);
 			}
+			
+			return;
 		}
 		
 		if ($signal === 'download') {
@@ -142,7 +144,7 @@ class UploadFile extends \Nette\Forms\Controls\UploadControl implements ISignalR
 		
 		if ($this->filename) {
 			$deleteLink = $form->getPresenter()->link($this->lookupPath() . '-delete!');
-			$downloadLink = $form->getPresenter()->link($this->lookupPath() . '-' . $this->getName() . '-download!');
+			$downloadLink = $form->getPresenter()->link($this->lookupPath() . '-download!');
 			
 			$this->downloadLink->setAttribute('href', $downloadLink)->setText($this->filename);
 			$this->deleteLink->setAttribute('href', $deleteLink);
@@ -151,6 +153,7 @@ class UploadFile extends \Nette\Forms\Controls\UploadControl implements ISignalR
 			$div->addHtml(parent::getControl()->setType('hidden')->setValue($this->filename));
 			$div->addHtml($this->deleteLink);
 		} else {
+			
 			$div->addHtml(parent::getControl());
 		}
 		
