@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Forms;
 
+use Nette\Forms\Controls\TextBase;
+
 /**
  * Trait LocaleComponentsTrait
  * @method \Forms\LocaleContainer addLocaleText(string $name, $label = null, int $cols = null, int $maxLength = null)
@@ -72,6 +74,10 @@ trait LocaleComponentsTrait
 			
 			$control->getLabelPrototype()->setAttribute('data-mutation', $mutation);
 			$control->getControlPrototype()->setAttribute('data-mutation', $mutation);
+			
+			if ($control instanceof TextBase) {
+				$control->setNullable();
+			}
 		}
 		
 		return $container;
