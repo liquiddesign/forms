@@ -43,7 +43,7 @@ function initTinyMCExconf(selector, conf_override) {
         code_dialog_height: 450,
         toolbar_items_size: 'small',
         plugins: [
-            "lqdnoneditable autolink link filemanager image lists charmap print preview hr anchor pagebreak",
+            "lqdnoneditable preventdelete autolink link filemanager image lists charmap print preview hr anchor pagebreak",
             "searchreplace wordcount visualblocks visualchars code ",
             "insertdatetime nonbreaking table contextmenu colorpicker fontawesome5 responsivefilemanager",
             "template paste textcolor insertcontent",
@@ -73,6 +73,7 @@ function initTinyMCExconf(selector, conf_override) {
             "fontawesome5" : extHomeUrl + "/assets/fontawesome5/plugin.min.js",
             "insertcontent" : extHomeUrl + "/assets/insertcontent/plugin.js",
             "lqdnoneditable" : extHomeUrl + "/assets/noneditable/plugin.min.js",
+            "preventdelete" : extHomeUrl + "/assets/preventdelete/plugin.min.js"
         },
         file_browser_callback_types: 'file image',
 
