@@ -32,7 +32,7 @@ function initTinyMCExconf(selector, conf_override) {
 		schema: 'html5',
 		verify_html: false,
 		theme: "modern",
-		menubar: "view",
+		menubar: false,
 		branding: false,
 		entity_encoding : "named", //vyjmenované entity nahrazuj
 		entities : "160,nbsp", //tohle jsou ty vyjmenované entity, jinak nám to maze nbsp z kodu
@@ -79,7 +79,7 @@ function initTinyMCExconf(selector, conf_override) {
 
 		toolbar1: "undo redo | styleselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | " +
 			"bullist numlist | subscript superscript | forecolor backcolor | table | link unlink anchor removeformat | ",
-		toolbar2: "responsivefilemanager image | hr charmap nonbreaking fontawesome5 | copy cut paste pastetext insertcontent | visualblocks visualchars | template deleteLayout code save",
+		toolbar2: "responsivefilemanager image | hr charmap nonbreaking fontawesome5 | copy cut paste pastetext insertcontent | visualblocks visualchars | template deleteLayout code save fullscreen",
 
 
 		language_url: extHomeUrl + '/assets/tinymce-langs/cs.js',
