@@ -6,6 +6,7 @@ namespace Forms;
 
 use Nette\DI\Container;
 use Nette\Http\Request;
+use Nette\Localization\Translator;
 
 class FormFactory
 {
@@ -26,6 +27,8 @@ class FormFactory
 	private ?string $flagsPath = null;
 	
 	private ?string $flagsExt = null;
+
+	private Translator $translator;
 	
 	protected Container $context;
 	
@@ -36,10 +39,11 @@ class FormFactory
 	 */
 	private array $wysiwygConfiguration;
 	
-	public function __construct(Container $context, Request $request)
+	public function __construct(Container $context, Request $request, Translator $translator)
 	{
 		$this->context = $context;
 		$this->request = $request;
+		$this->translator = $translator;
 	}
 	
 	public function setDefaultUserDir(string $userDir): void
@@ -119,6 +123,7 @@ class FormFactory
 		$form->setUserPaths(($this->context->getParameters()['wwwDir'] ?? '') . \DIRECTORY_SEPARATOR . $this->getDefaultUserDir(), $this->request->getUrl()->getBaseUrl() . $this->getDefaultUserDir());
 		$form->setFlagsConfiguration($this->request->getUrl()->getBaseUrl() . $this->flagsPath, $this->flagsExt, $this->flagsMap);
 		$form->setWysiwygConfiguration($this->wysiwygConfiguration['contentCss'] ?? [], $this->wysiwygConfiguration['templates'] ?? []);
+		$form->setFormTranslator($this->translator);
 		
 		return $form;
 	}

@@ -8,6 +8,7 @@ use Forms\Controls\Antispam;
 use Forms\Controls\DoubleClickProtection;
 use Nette\Application\ApplicationException;
 use Nette\Forms\Controls\Checkbox;
+use Nette\Localization\Translator;
 use Nette\Utils\Html;
 
 /**
@@ -21,6 +22,8 @@ class Form extends \Nette\Application\UI\Form
 	public const MUTATION_SELECTOR_NAME = '__MUTATION_SELECTOR';
 	public const MUTATION_TRANSLATOR_NAME = 'active';
 	public const ANTISPAM_ID = '_antispam_';
+
+	private Translator $translator;
 	
 	protected ?string $flagsPath = null;
 	
@@ -68,6 +71,11 @@ class Form extends \Nette\Application\UI\Form
 		$this->addComponent($control, self::PROTECTOR_ID, \key((array) $this->getComponents()));
 		
 		return $control;
+	}
+
+	public function setFormTranslator(Translator $translator): void
+	{
+		$this->translator = $translator;
 	}
 	
 	public function addAntispam(string $errorMessage, float $timeThreshold = 1.0): Antispam
@@ -235,6 +243,8 @@ class Form extends \Nette\Application\UI\Form
 			$checkbox->setDefaultValue(true);
 			
 			if ($forcePrimary) {
+				$label = $this->translator->translate('admin.defaultActiveMutation', 'Výchozí mutace je aktivní');
+				$checkbox->setCaption($label);
 				$checkbox->setHtmlAttribute('style', 'display:none;');
 				$checkbox->getLabelPrototype()->setAttribute('style', 'position: relative; left: -1.25rem');
 			} else {
