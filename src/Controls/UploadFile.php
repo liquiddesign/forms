@@ -65,6 +65,17 @@ class UploadFile extends \Nette\Forms\Controls\UploadControl implements ISignalR
 		return $this;
 	}
 	
+	/**
+	 * Performs the server side validation.
+	 */
+	public function validate(): void
+	{
+		if ($this->getValue()) {
+			return;
+		}
+		
+		parent::validate();
+	}
 	
 	public function upload(string $filenameFormat = '%1$s.%2$s'): ?string
 	{

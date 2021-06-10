@@ -67,6 +67,18 @@ class UploadImage extends \Nette\Forms\Controls\UploadControl implements ISignal
 	}
 	
 	/**
+	 * Performs the server side validation.
+	 */
+	public function validate(): void
+	{
+		if ($this->getValue()) {
+			return;
+		}
+		
+		parent::validate();
+	}
+	
+	/**
 	 * @param mixed $value
 	 * @return static
 	 */
