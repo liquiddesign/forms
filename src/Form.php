@@ -262,7 +262,7 @@ class Form extends \Nette\Application\UI\Form
 		});
 		
 		/* @phpstan-ignore-next-line */
-		$this->getForm()->onAnchor[] = function (Form $form) use ($name): void {
+		$this->getForm()->onRender[] = function (Form $form) use ($name): void {
 			foreach ($form->getMutations() as $mutation) {
 				if (!$form[$name][$mutation]->getValue()) {
 					foreach ($form->getComponents(true) as $component) {
