@@ -1,5 +1,6 @@
 {ifset $polyfills}
 {do $polyfills = Nette\Utils\Arrays::normalize($polyfills)}
+<script n:ifset="$polyfills['select2']" src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script n:ifset="$polyfills['tail.select']" src="{$nodeUrl}/tail.select/js/tail.select.js"></script>
 <script n:ifset="$polyfills['tail.select']" src="{$baseUrl}/public/js/tail.select-cs.js"></script>
 <script n:ifset="$polyfills['flatpickr']" src="{$nodeUrl}/flatpickr/dist/flatpickr.js"></script>
@@ -43,6 +44,9 @@
 						{/if}
 						{if $name === 'tail.select'}
         					polyfills[{$id}] = tail.select("#{$id|noescape}", {\json_encode($configuration)|noescape});
+						{/if}
+						{if $name === 'select2'}
+							$('#' + {$id}).select2({\json_encode($configuration)|noescape});
 						{/if}
 						{if $name === 'tinymce'}
         					polyfills[{$id}] = initTinyMCExconf("#{$id|noescape}", {\json_encode($configuration)|noescape});

@@ -128,6 +128,21 @@ trait ComponentsTrait
 		
 		return $selectbox;
 	}
+
+	public function addMultiSelect2($name, ?string $label = null, ?array $items = null, ?array $configuration = []): MultiSelectBox
+	{
+		$default = [
+			'theme' => 'classic',
+			'maximumSelectionLength' => 15,
+		];
+		
+		$selectbox = $this->addMultiSelect($name, $label, $items);
+		
+		$this->getForm()->addPolyfill('select2', $selectbox->getHtmlId(), $configuration + $default);
+		$selectbox->setHtmlAttribute('class', 'select2');
+
+		return $selectbox;
+	}
 	
 	public function addImagePicker($name, ?string $label = null, array $directories = [], ?string $infoText = null): UploadImage
 	{
