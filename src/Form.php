@@ -25,6 +25,8 @@ class Form extends \Nette\Application\UI\Form
 
 	private Translator $translator;
 	
+	private ?string $adminLang = null;
+	
 	protected ?string $flagsPath = null;
 	
 	protected ?string $flagsExt = null;
@@ -76,6 +78,19 @@ class Form extends \Nette\Application\UI\Form
 	public function setFormTranslator(Translator $translator): void
 	{
 		$this->translator = $translator;
+	}
+	
+	public function setAdminLang(string $lang): void
+	{
+		$this->adminLang = $lang;
+	}
+	
+	public function getAdminLang(): ?string {
+		if ($this->adminLang) {
+			return $this->adminLang;
+		}
+		
+		return $this->getPrimaryMutation();
 	}
 	
 	public function addAntispam(string $errorMessage, float $timeThreshold = 1.0): Antispam

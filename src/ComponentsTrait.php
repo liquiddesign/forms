@@ -128,7 +128,21 @@ trait ComponentsTrait
 		
 		return $selectbox;
 	}
-
+	
+	public function addSelect2($name, ?string $label = null, ?array $items = null, ?array $configuration = []): SelectBox
+	{
+		$default = [
+			'maximumSelectionLength' => 15,
+		];
+		
+		$selectbox = $this->addSelect($name, $label, $items);
+		$this->getForm()->addPolyfill('multiselect2', $selectbox->getHtmlId(), $configuration + $default);
+		$this->getForm()->addPolyfill('multiselect2' . $this->getAdminLang(), $selectbox->getHtmlId(), []);
+		$selectbox->setHtmlAttribute('class', 'multiselect2');
+		
+		return $selectbox;
+	}
+	
 	public function addMultiSelect2($name, ?string $label = null, ?array $items = null, ?array $configuration = []): MultiSelectBox
 	{
 		$default = [
@@ -137,10 +151,10 @@ trait ComponentsTrait
 		];
 		
 		$selectbox = $this->addMultiSelect($name, $label, $items);
+		$this->getForm()->addPolyfill('multiselect2', $selectbox->getHtmlId(), $configuration + $default);
+		$this->getForm()->addPolyfill('multiselect2'. $this->getAdminLang(), $selectbox->getHtmlId(), []);
+		$selectbox->setHtmlAttribute('class', 'multiselect2');
 		
-		$this->getForm()->addPolyfill('select2', $selectbox->getHtmlId(), $configuration + $default);
-		$selectbox->setHtmlAttribute('class', 'select2');
-
 		return $selectbox;
 	}
 	
