@@ -40,8 +40,8 @@ trait ComponentsTrait
 		$init = [
 			'height' => 150,
 			'width' => 1024,
-			'plugins' => ["autolink link"],
-			'toolbar1' => "undo redo | styleselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | link unlink anchor | copy cut paste pastetext insertcontent",
+			'plugins' => ["autolink link", "code"],
+			'toolbar1' => "undo redo | styleselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | link unlink anchor | copy cut paste pastetext insertcontent code",
 			'toolbar2' => "",
 			'setup' => false,
 		];
