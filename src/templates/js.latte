@@ -57,6 +57,14 @@
 				{/foreach}
 			{/if}
 		{/foreach}
+
+		{ifset $select2AjaxDefaults}
+			{foreach $select2AjaxDefaults as $htmlId => $values}
+				{foreach $values as $key => $value}
+					$('#' + {$htmlId}).append(new Option({$value}, {$key}, true, true)).trigger('change');
+				{/foreach}
+			{/foreach}
+		{/ifset}
     });
 </script>
 {/ifset}
