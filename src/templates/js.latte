@@ -1,5 +1,8 @@
 {ifset $polyfills}
 {do $polyfills = Nette\Utils\Arrays::normalize($polyfills)}
+<script n:ifset="$polyfills['multiselect2']" src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script n:ifset="$polyfills['multiselect2cs']" src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/i18n/cs.js"></script>
+<script n:ifset="$polyfills['multiselect2en']" src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/i18n/en.js"></script>
 <script n:ifset="$polyfills['tail.select']" src="{$nodeUrl}/tail.select/js/tail.select.js"></script>
 <script n:ifset="$polyfills['tail.select']" src="{$baseUrl}/public/js/tail.select-cs.js"></script>
 <script n:ifset="$polyfills['flatpickr']" src="{$nodeUrl}/flatpickr/dist/flatpickr.js"></script>
@@ -44,6 +47,9 @@
 						{if $name === 'tail.select'}
         					polyfills[{$id}] = tail.select("#{$id|noescape}", {\json_encode($configuration)|noescape});
 						{/if}
+						{if $name === 'multiselect2'}
+							$('#' + {$id}).select2({\json_encode($configuration)|noescape});
+						{/if}
 						{if $name === 'tinymce'}
         					polyfills[{$id}] = initTinyMCExconf("#{$id|noescape}", {\json_encode($configuration)|noescape});
 						{/if}
@@ -51,6 +57,14 @@
 				{/foreach}
 			{/if}
 		{/foreach}
+
+		{ifset $select2AjaxDefaults}
+			{foreach $select2AjaxDefaults as $htmlId => $values}
+				{foreach $values as $key => $value}
+					$('#' + {$htmlId}).append(new Option({$value}, {$key}, true, true)).trigger('change');
+				{/foreach}
+			{/foreach}
+		{/ifset}
     });
 </script>
 {/ifset}

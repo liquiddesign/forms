@@ -23,6 +23,7 @@ use Nette\Forms\Controls\TextBase;
  * @method \Forms\LocaleContainer addLocaleImage(string $name, string $src = null, string $alt = null)
  * @method \Forms\LocaleContainer addLocalePerexEdit(string $name, ?string $label = null, ?array $configuration = [])
  * @method \Forms\LocaleContainer addLocaleRichEdit(string $name, ?string $label = null, ?array $configuration = [])
+ * @method \Forms\LocaleContainer addLocaleHidden(string $name)
  * @mixin \Nette\Forms\Container
  */
 trait LocaleComponentsTrait

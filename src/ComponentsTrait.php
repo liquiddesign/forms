@@ -40,8 +40,8 @@ trait ComponentsTrait
 		$init = [
 			'height' => 150,
 			'width' => 1024,
-			'plugins' => ["autolink link"],
-			'toolbar1' => "undo redo | styleselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | link unlink anchor | copy cut paste pastetext insertcontent",
+			'plugins' => ["autolink link", "code"],
+			'toolbar1' => "undo redo | styleselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | link unlink anchor | copy cut paste pastetext insertcontent code",
 			'toolbar2' => "",
 			'setup' => false,
 		];
@@ -125,6 +125,35 @@ trait ComponentsTrait
 		
 		$this->getForm()->addPolyfill('tail.select', $selectbox->getHtmlId(), $configuration + $default);
 		$selectbox->setHtmlAttribute('class', 'tail.select');
+		
+		return $selectbox;
+	}
+	
+	public function addSelect2($name, ?string $label = null, ?array $items = null, ?array $configuration = []): SelectBox
+	{
+		$default = [
+			'maximumSelectionLength' => 15,
+		];
+		
+		$selectbox = $this->addSelect($name, $label, $items);
+		$this->getForm()->addPolyfill('multiselect2', $selectbox->getHtmlId(), $configuration + $default);
+		$this->getForm()->addPolyfill('multiselect2' . $this->getAdminLang(), $selectbox->getHtmlId(), []);
+		$selectbox->setHtmlAttribute('class', 'multiselect2');
+		
+		return $selectbox;
+	}
+	
+	public function addMultiSelect2($name, ?string $label = null, ?array $items = null, ?array $configuration = []): MultiSelectBox
+	{
+		$default = [
+			'theme' => 'classic',
+			'maximumSelectionLength' => 15,
+		];
+		
+		$selectbox = $this->addMultiSelect($name, $label, $items);
+		$this->getForm()->addPolyfill('multiselect2', $selectbox->getHtmlId(), $configuration + $default);
+		$this->getForm()->addPolyfill('multiselect2'. $this->getAdminLang(), $selectbox->getHtmlId(), []);
+		$selectbox->setHtmlAttribute('class', 'multiselect2');
 		
 		return $selectbox;
 	}
