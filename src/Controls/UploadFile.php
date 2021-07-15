@@ -28,9 +28,9 @@ class UploadFile extends \Nette\Forms\Controls\UploadControl implements ISignalR
 	
 	protected ?string $directory;
 	
-	protected Html $deleteLink;
+	protected ?Html $deleteLink;
 	
-	protected Html $downloadLink;
+	protected ?Html $downloadLink;
 	
 	public function __construct($label = null, ?string $directory = null, ?string $infoText = null)
 	{
@@ -136,12 +136,12 @@ class UploadFile extends \Nette\Forms\Controls\UploadControl implements ISignalR
 		$this->value = new FileUpload(null);
 	}
 	
-	public function setDeleteLink(Html $a): void
+	public function setDeleteLink(?Html $a): void
 	{
 		$this->deleteLink = $a;
 	}
 	
-	public function setDownloadLink(Html $a): void
+	public function setDownloadLink(?Html $a): void
 	{
 		$this->downloadLink = $a;
 	}
@@ -154,15 +154,19 @@ class UploadFile extends \Nette\Forms\Controls\UploadControl implements ISignalR
 		$div = Html::el("div");
 		
 		if ($this->filename) {
-			$deleteLink = $form->getPresenter()->link($this->lookupPath() . '-delete!');
-			$downloadLink = $form->getPresenter()->link($this->lookupPath() . '-download!');
+			if ($this->downloadLink) {
+				$downloadLink = $form->getPresenter()->link($this->lookupPath() . '-download!');
+				$this->downloadLink->setAttribute('href', $downloadLink)->setText($this->filename);
+				$div->addHtml($this->downloadLink);
+			}
 			
-			$this->downloadLink->setAttribute('href', $downloadLink)->setText($this->filename);
-			$this->deleteLink->setAttribute('href', $deleteLink);
-			
-			$div->addHtml($this->downloadLink);
 			$div->addHtml(parent::getControl()->setType('hidden')->setValue($this->filename));
-			$div->addHtml($this->deleteLink);
+			
+			if ($this->deleteLink) {
+				$deleteLink = $form->getPresenter()->link($this->lookupPath() . '-delete!');
+				$this->deleteLink->setAttribute('href', $deleteLink);
+				$div->addHtml($this->deleteLink);
+			}
 		} else {
 			
 			$div->addHtml(parent::getControl());
