@@ -142,6 +142,30 @@ trait ComponentsTrait
 		
 		return $selectbox;
 	}
+
+	public function addSelect2Ajax(
+		$name,
+		string $url,
+		?string $label = null,
+		?array $configuration = [],
+		?string $placeholder = null
+	): SelectBox {
+		$configuration += [
+			'ajax' => [
+				'url' => $url,
+				'delay' => 250
+			],
+			'minimumInputLength' => 2,
+		];
+
+		if ($placeholder) {
+			$configuration += [
+				'placeholder' => $placeholder
+			];
+		}
+
+		return $this->addSelect2($name, $label, null, $configuration)->checkDefaultValue(false);
+	}
 	
 	public function addMultiSelect2($name, ?string $label = null, ?array $items = null, ?array $configuration = []): MultiSelectBox
 	{
