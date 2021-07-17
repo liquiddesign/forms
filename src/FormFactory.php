@@ -57,9 +57,9 @@ class FormFactory
 	 * @param string[] $contentCss
 	 * @param string[] $templates
 	 */
-	public function setWysiwygConfiguration(array $filemanager, array $widgets, array $contentCss, array $templates): void
+	public function setWysiwygConfiguration(array $filemanager, array $widgets, array $contentCss, array $templates, ?string $tinyConfig): void
 	{
-		$this->wysiwygConfiguration = ['filemanager' => $filemanager, 'widgets' => $widgets, 'contentCss' => $contentCss, 'templates' => $templates];
+		$this->wysiwygConfiguration = ['filemanager' => $filemanager, 'widgets' => $widgets, 'contentCss' => $contentCss, 'templates' => $templates, 'tinyConfig' => $tinyConfig];
 	}
 	
 	/**
@@ -122,7 +122,7 @@ class FormFactory
 		$form->setPrimaryMutation($this->getDefaultPrimaryMutation());
 		$form->setUserPaths(($this->context->getParameters()['wwwDir'] ?? '') . \DIRECTORY_SEPARATOR . $this->getDefaultUserDir(), $this->request->getUrl()->getBaseUrl() . $this->getDefaultUserDir());
 		$form->setFlagsConfiguration($this->request->getUrl()->getBaseUrl() . $this->flagsPath, $this->flagsExt, $this->flagsMap);
-		$form->setWysiwygConfiguration($this->wysiwygConfiguration['contentCss'] ?? [], $this->wysiwygConfiguration['templates'] ?? []);
+		$form->setWysiwygConfiguration($this->wysiwygConfiguration['contentCss'] ?? [], $this->wysiwygConfiguration['templates'] ?? [], $this->wysiwygConfiguration['tinyConfig'] ?? null);
 		$form->setFormTranslator($this->translator);
 		
 		return $form;

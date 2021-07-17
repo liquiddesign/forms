@@ -21,6 +21,7 @@ class FormsDI extends \Nette\DI\CompilerExtension
 			'wysiwyg' => Expect::structure([
 				'contentCss' => Expect::arrayOf('string'),
 				'templates' => Expect::mixed(),
+				'tinyConfig' => Expect::string(),
 				'filemanager' => Expect::structure([
 					'directory' => Expect::string('userfiles'),
 					'isAllowed' => Expect::mixed(),
@@ -50,6 +51,7 @@ class FormsDI extends \Nette\DI\CompilerExtension
 			(array) $config->wysiwyg->widgets,
 			(array) $config->wysiwyg->contentCss,
 			$config->wysiwyg->templates,
+			$config->wysiwyg->tinyConfig,
 			]);
 		$pages->addSetup('setDefaultFlagsConfiguration', [$config->flagsPath, $config->flagsExt, $config->flagsMap]);
 		$pages->addSetup('setDefaultPrimaryMutation', [$config->primaryMutation ?: \current($config->mutations)]);

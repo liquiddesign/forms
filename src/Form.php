@@ -62,6 +62,9 @@ class Form extends \Nette\Application\UI\Form
 		parent::__construct($parent, $name);
 		
 		$this->setRenderer(new DefaultRenderer());
+		$this->onAnchor[] = function (Form $form): void {
+			$form->getPresenterIfExists()->template->tinyConfig = $form->getWysiwygConfiguration()['tinyConfig'];
+		};
 	}
 	
 	/**
@@ -186,10 +189,11 @@ class Form extends \Nette\Application\UI\Form
 		$this->userUrl = $userUrl;
 	}
 	
-	public function setWysiwygConfiguration(array $contentCss, array $templates): void
+	public function setWysiwygConfiguration(array $contentCss, array $templates, ?string $tinyConfig): void
 	{
 		$this->wysiwygConfiguration['contentCss'] = $contentCss;
 		$this->wysiwygConfiguration['templates'] = $templates;
+		$this->wysiwygConfiguration['tinyConfig'] = $tinyConfig;
 	}
 	
 	public function getWysiwygConfiguration(): array
