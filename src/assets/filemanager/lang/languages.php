@@ -9,7 +9,7 @@ return array(
     'da' => 'Dansk',
     'de' => 'Deutsch',
     'el_GR' => 'ελληνικά',
-    'en_EN' => 'English',
+    'en' => 'English',
     'es' => 'Español',
     'fa' => 'فارسی',
     'fr_FR' => 'Français',
