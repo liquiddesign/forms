@@ -61,7 +61,7 @@ trait ComponentsTrait
 	
 	public function addDatetime(string $name, ?string $label = null, ?array $configuration = []): TextInput
 	{
-		return $this->addDate($name, $label, $configuration + ['enableTime' => true]);
+		return $this->addDate($name, $label, $configuration + ['enableTime' => true, 'altFormat' => 'd.m.Y H:i']);
 	}
 	
 	public function addTime(string $name, ?string $label = null, ?array $configuration = []): TextInput
