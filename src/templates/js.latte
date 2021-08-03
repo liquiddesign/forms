@@ -8,7 +8,7 @@
 <script n:ifset="$polyfills['flatpickr']" src="{$nodeUrl}/flatpickr/dist/flatpickr.js"></script>
 <script n:ifset="$polyfills['nouislider']" src="{$nodeUrl}/nouislider/distribute/nouislider.js"></script>
 <script n:ifset="$polyfills['tinymce']" src="{$nodeUrl}/tinymce/tinymce.js"></script>
-<script n:ifset="$polyfills['tinymce']" src="{$baseUrl}/{$tinyConfig ?? 'vendor/liquiddesign/forms/src/assets/tinymce.js'}"></script>
+<script n:ifset="$polyfills['tinymce']" src="{$baseUrl}/{$tinyConfig}"></script>
 
 <script>
     if (typeof baseUrl === 'undefined') {

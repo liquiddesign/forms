@@ -63,7 +63,9 @@ class Form extends \Nette\Application\UI\Form
 		
 		$this->setRenderer(new DefaultRenderer());
 		$this->onAnchor[] = function (Form $form): void {
-			$form->getPresenterIfExists()->template->tinyConfig = $form->getWysiwygConfiguration()['tinyConfig'] ?? [];
+			if ($presenter = $form->getPresenterIfExists()) {
+				$presenter->template->tinyConfig = $form->getWysiwygConfiguration()['tinyConfig'];
+			}
 		};
 	}
 	

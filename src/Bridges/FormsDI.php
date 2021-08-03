@@ -21,7 +21,7 @@ class FormsDI extends \Nette\DI\CompilerExtension
 			'wysiwyg' => Expect::structure([
 				'contentCss' => Expect::arrayOf('string'),
 				'templates' => Expect::mixed(),
-				'tinyConfig' => Expect::string(),
+				'tinyConfig' => Expect::string('vendor/liquiddesign/forms/src/assets/tinymce.js'),
 				'filemanager' => Expect::structure([
 					'directory' => Expect::string('userfiles'),
 					'isAllowed' => Expect::mixed(),
