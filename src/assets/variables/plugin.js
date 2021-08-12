@@ -10,7 +10,7 @@ tinymce.PluginManager.add('variables', function(editor) {
         });
     }
     editor.addButton('variables', {
-        icon: 'awesome fas fa-dolar-sign',
+        icon: 'awesome fas fa-dollar-sign',
         tooltip: 'Vložit proměnou',
         onclick: showDialog
     });
