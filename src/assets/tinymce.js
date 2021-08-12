@@ -1,5 +1,9 @@
 function initTinyMCExconf(selector, conf_override) {
 
+	if (typeof conf_override['variables'] === "undefined") {
+		conf_override['variables'] = [];
+	}
+
 	if (typeof conf_override['templates'] === "undefined") {
 		conf_override['templates'] = [];
 	}
@@ -73,13 +77,14 @@ function initTinyMCExconf(selector, conf_override) {
 			"fontawesome5" : extHomeUrl + "/assets/fontawesome5/plugin.min.js",
 			"insertcontent" : extHomeUrl + "/assets/insertcontent/plugin.js",
 			"lqdnoneditable" : extHomeUrl + "/assets/noneditable/plugin.min.js",
-			"preventdelete" : extHomeUrl + "/assets/preventdelete/plugin.min.js"
+			"preventdelete" : extHomeUrl + "/assets/preventdelete/plugin.min.js",
+			"variables" : extHomeUrl + "/assets/variables/plugin.js",
 		},
 		file_browser_callback_types: 'file image',
 
 		toolbar1: "undo redo | styleselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | " +
 			"bullist numlist | subscript superscript | forecolor backcolor | table | link unlink anchor removeformat | ",
-		toolbar2: "responsivefilemanager image | hr charmap nonbreaking fontawesome5 | copy cut paste pastetext insertcontent | visualblocks visualchars | template deleteLayout code save fullscreen",
+		toolbar2: "responsivefilemanager image | hr charmap nonbreaking fontawesome5 variables | copy cut paste pastetext insertcontent | visualblocks visualchars | template deleteLayout code save fullscreen",
 
 
 		language_url: extHomeUrl + '/assets/tinymce-langs/cs.js',
