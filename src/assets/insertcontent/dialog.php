@@ -16,7 +16,7 @@ $baseUrl = \dirname($container->getByType(\Nette\Http\Request::class)->getUrl(),
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="<?php echo $baseUrl; ?>/public/node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?php echo $baseUrl; ?>/public/node_modules/bootstrap-old/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?php echo $baseUrl; ?>/public/admin/css/admin.css">
 	<script src="<?php echo $baseUrl; ?>/public/node_modules/jquery/dist/jquery.min.js"></script>
 	<title>Insert Translation</title>
@@ -137,6 +137,6 @@ $langs = $container->getParameters()['mutations'] ?? [];
 
 </script>
 
-<script src="<?php echo $baseUrl?>/public/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="<?php echo $baseUrl?>/public/node_modules/bootstrap-old/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
