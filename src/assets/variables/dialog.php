@@ -8,7 +8,6 @@ $container = App\Bootstrap::boot()->createContainer();
 \Tracy\Debugger::$showBar = false;
 
 $baseUrl = \dirname($container->getByType(\Nette\Http\Request::class)->getUrl(), $rootLevel + 1);
-$translator = $container->getByType(\Nette\Localization\Translator::class);
 ?>
 <!doctype html>
 <html lang="cs">
@@ -26,6 +25,10 @@ $translator = $container->getByType(\Nette\Localization\Translator::class);
     const variables = top.tinymce.settings.variables;
 </script>
 <style>
+	strong {
+		font-weight: bold;
+	}
+
 	.widget-module {
 		color: #888;
 		display: block;
@@ -68,10 +71,10 @@ $translator = $container->getByType(\Nette\Localization\Translator::class);
 			<div class="list-group" id="variable-group"></div>
 			<script>
                 var group = document.getElementById('variable-group');
-				if (variables.length) {
+                if (variables) {
                     for (const [key, value] of Object.entries(variables)) {
                         var button = document.createElement('button');
-                        button.innerHTML = key + ' - ' + value;
+                        button.innerHTML = '<strong>'+ key +'</strong>' + ' - ' + value;
                         button.setAttribute('class', 'list-group-item list-group-item-action');
                         button.setAttribute('style', 'padding: 0.3rem 1.25rem!important');
                         button.onclick = function(){
@@ -81,12 +84,12 @@ $translator = $container->getByType(\Nette\Localization\Translator::class);
                         };
                         group.appendChild(button);
                     };
-				} else {
-				    var paragraph = document.createElement('p');
-				    paragraph.innerHTML = "Žádné proměnné k dispozici";
-				    paragraph.setAttribute('class', 'text-center');
+                } else {
+                    var paragraph = document.createElement('p');
+                    paragraph.innerHTML = "Žádné proměnné k dispozici";
+                    paragraph.setAttribute('class', 'text-center');
                     group.appendChild(paragraph);
-				}
+                }
 			</script>
 		</div>
 	</div>

@@ -46,6 +46,7 @@ function initTinyMCExconf(selector, conf_override) {
 		code_dialog_width: 800,
 		code_dialog_height: 450,
 		toolbar_items_size: 'small',
+		variables: conf_override['variables'],
 		plugins: [
 			"fullscreen lqdnoneditable preventdelete autolink link filemanager image lists charmap print preview hr anchor pagebreak",
 			"searchreplace wordcount visualblocks visualchars code ",
