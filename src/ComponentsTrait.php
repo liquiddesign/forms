@@ -137,7 +137,7 @@ trait ComponentsTrait
 		
 		$selectbox = $this->addSelect($name, $label, $items);
 		$this->getForm()->addPolyfill('multiselect2', $selectbox->getHtmlId(), $configuration + $default);
-		$this->getForm()->addPolyfill('multiselect2' . $this->getAdminLang(), $selectbox->getHtmlId(), []);
+		$this->getForm()->addPolyfill('multiselect2' . $this->getForm()->getAdminLang(), $selectbox->getHtmlId(), []);
 		$selectbox->setHtmlAttribute('class', 'multiselect2');
 		
 		return $selectbox;
@@ -176,7 +176,7 @@ trait ComponentsTrait
 		
 		$selectbox = $this->addMultiSelect($name, $label, $items);
 		$this->getForm()->addPolyfill('multiselect2', $selectbox->getHtmlId(), $configuration + $default);
-		$this->getForm()->addPolyfill('multiselect2'. $this->getAdminLang(), $selectbox->getHtmlId(), []);
+		$this->getForm()->addPolyfill('multiselect2'. $this->getForm()->getAdminLang(), $selectbox->getHtmlId(), []);
 		$selectbox->setHtmlAttribute('class', 'multiselect2');
 		
 		return $selectbox;
