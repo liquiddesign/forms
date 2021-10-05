@@ -156,6 +156,7 @@ trait ComponentsTrait
 				'delay' => 250
 			],
 			'minimumInputLength' => 2,
+			'allowClear' => true
 		];
 
 		if ($placeholder) {
