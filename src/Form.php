@@ -298,6 +298,21 @@ class Form extends \Nette\Application\UI\Form
 				}
 			}
 		};
+		
+		$this->getForm()->onValidate[] = function ($form) use ($name) {
+			$notEmpty = !$form->getMutations();
+			
+			foreach ($form->getMutations() as $mutation) {
+				if ($form[$name][$mutation]->getValue()) {
+					$notEmpty = true;
+				}
+			}
+			
+			if (!$notEmpty) {
+				$form[$name][$this->getPrimaryMutation()]->setValue(true);
+				$form[$form::MUTATION_SELECTOR_NAME]->setValue($this->getPrimaryMutation());
+			}
+		};
 	}
 	
 	public function removeMutationSelector(): void
