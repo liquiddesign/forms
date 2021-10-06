@@ -300,15 +300,15 @@ class Form extends \Nette\Application\UI\Form
 		};
 		
 		$this->getForm()->onValidate[] = function ($form) use ($name) {
-			$notEmpty = !$form->getMutations();
+			$empty = (bool) $form->getMutations();
 			
 			foreach ($form->getMutations() as $mutation) {
 				if ($form[$name][$mutation]->getValue()) {
-					$notEmpty = true;
+					$empty = false;
 				}
 			}
 			
-			if (!$notEmpty) {
+			if (!$empty) {
 				$form[$name][$this->getPrimaryMutation()]->setValue(true);
 				$form[$form::MUTATION_SELECTOR_NAME]->setValue($this->getPrimaryMutation());
 			}
