@@ -293,6 +293,8 @@ class Form extends \Nette\Application\UI\Form
 							$control->setDisabled();
 						}
 					}
+				} elseif (!$form[$name][$form[$form::MUTATION_SELECTOR_NAME]->getValue()]->getValue()) {
+					$form[$form::MUTATION_SELECTOR_NAME]->setDefaultValue($mutation);
 				}
 			}
 		};
