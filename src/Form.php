@@ -308,7 +308,7 @@ class Form extends \Nette\Application\UI\Form
 				}
 			}
 			
-			if (!$empty) {
+			if ($empty) {
 				$form[$name][$this->getPrimaryMutation()]->setValue(true);
 				$form[$form::MUTATION_SELECTOR_NAME]->setValue($this->getPrimaryMutation());
 			}
