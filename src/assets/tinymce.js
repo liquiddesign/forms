@@ -162,7 +162,6 @@ function initTinyMCExconf(selector, conf_override) {
 					const image = tagName === "P" ? element.querySelector('img') : element;
 
 					if (image) {
-						image.setAttribute('data-src', image.dataset.src ? image.dataset.src : image.src);
 						image.setAttribute("loading", image.loading === 'eager' ? image.loading : 'lazy');
 					}
 				}
