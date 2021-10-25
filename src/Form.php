@@ -13,6 +13,7 @@ use Nette\Utils\Html;
 
 /**
  * Class Form
+ * @property array<callable(static, array|object): void|callable(array|object): void> $onSuccess
  */
 class Form extends \Nette\Application\UI\Form
 {
