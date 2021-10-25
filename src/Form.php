@@ -7,6 +7,7 @@ namespace Forms;
 use Forms\Controls\Antispam;
 use Forms\Controls\DoubleClickProtection;
 use Nette\Application\ApplicationException;
+use Nette\Forms\Controls\BaseControl;
 use Nette\Forms\Controls\Checkbox;
 use Nette\Localization\Translator;
 use Nette\Utils\Html;
@@ -14,6 +15,7 @@ use Nette\Utils\Html;
 /**
  * Class Form
  * @property array<callable(static, array|object): void|callable(array|object): void> $onSuccess
+ * @property array<callable(static): void> $onAnchor
  */
 class Form extends \Nette\Application\UI\Form
 {
@@ -24,10 +26,6 @@ class Form extends \Nette\Application\UI\Form
 	public const MUTATION_TRANSLATOR_NAME = 'active';
 	public const ANTISPAM_ID = '_antispam_';
 
-	private Translator $translator;
-	
-	private ?string $adminLang = null;
-	
 	protected ?string $flagsPath = null;
 	
 	protected ?string $flagsExt = null;
@@ -37,6 +35,9 @@ class Form extends \Nette\Application\UI\Form
 	 */
 	protected array $flagsMap = [];
 	
+	/**
+	 * @var int[]|string[]|string[][],null[]
+	 */
 	protected array $wysiwygConfiguration = [
 		'contentCss' => [],
 		'templates' => [],
@@ -57,6 +58,10 @@ class Form extends \Nette\Application\UI\Form
 	 * @var mixed[][]
 	 */
 	protected array $polyfills = [];
+
+	private Translator $translator;
+	
+	private ?string $adminLang = null;
 	
 	public function __construct(?\Nette\ComponentModel\IContainer $parent = null, ?string $name = null)
 	{
@@ -91,7 +96,8 @@ class Form extends \Nette\Application\UI\Form
 		$this->adminLang = $lang;
 	}
 	
-	public function getAdminLang(): ?string {
+	public function getAdminLang(): ?string
+	{
 		if ($this->adminLang) {
 			return $this->adminLang;
 		}
@@ -199,12 +205,14 @@ class Form extends \Nette\Application\UI\Form
 		$this->wysiwygConfiguration['tinyConfig'] = $tinyConfig;
 	}
 	
+	/**
+	 * @return int[]|string[]|string[][],null[]
+	 */
 	public function getWysiwygConfiguration(): array
 	{
 		return $this->wysiwygConfiguration;
 	}
-	
-	
+
 	public function getUserDir(): string
 	{
 		return $this->userDir;
@@ -279,7 +287,7 @@ class Form extends \Nette\Application\UI\Form
 			$checkbox->setOmitted($omitted);
 		});
 		
-		$localeContainer->forSecondary(function (Checkbox $checkbox, $mutation) use ($omitted): void {
+		$localeContainer->forSecondary(function (Checkbox $checkbox, $mutation): void {
 			$checkbox->setHtmlAttribute('onclick', 'formDisableMutation(this.form,"'.$mutation.'","'.self::MUTATION_TRANSLATOR_NAME.'")');
 		});
 		
@@ -294,13 +302,13 @@ class Form extends \Nette\Application\UI\Form
 							$control->setDisabled();
 						}
 					}
-				} elseif (!$form[$name][$form[$form::MUTATION_SELECTOR_NAME]->getValue()]->getValue()) {
+				} elseif ($form[$form::MUTATION_SELECTOR_NAME] instanceof BaseControl && !$form[$name][$form[$form::MUTATION_SELECTOR_NAME]->getValue()]->getValue()) {
 					$form[$form::MUTATION_SELECTOR_NAME]->setDefaultValue($mutation);
 				}
 			}
 		};
 		
-		$this->getForm()->onValidate[] = function ($form) use ($name) {
+		$this->getForm()->onValidate[] = function ($form) use ($name): void {
 			$empty = (bool) $form->getMutations();
 			
 			foreach ($form->getMutations() as $mutation) {
@@ -309,10 +317,12 @@ class Form extends \Nette\Application\UI\Form
 				}
 			}
 			
-			if ($empty) {
-				$form[$name][$this->getPrimaryMutation()]->setValue(true);
-				$form[$form::MUTATION_SELECTOR_NAME]->setValue($this->getPrimaryMutation());
+			if (!$empty) {
+				return;
 			}
+
+			$form[$name][$this->getPrimaryMutation()]->setValue(true);
+			$form[$form::MUTATION_SELECTOR_NAME]->setValue($this->getPrimaryMutation());
 		};
 	}
 	

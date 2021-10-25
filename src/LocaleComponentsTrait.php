@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Forms;
 
+use Nette\Forms\Controls\BaseControl;
 use Nette\Forms\Controls\TextBase;
 
 /**
@@ -34,9 +35,13 @@ trait LocaleComponentsTrait
 		return $this instanceof Form ? $this : $this->lookup(Form::class, $throw);
 	}
 	
-	public function setRequired(bool $required = true)
+	public function setRequired(bool $required = true): void
 	{
 		foreach ($this->getForm()->getMutations() as $mutation) {
+			if (!$this[$mutation] instanceof BaseControl) {
+				continue;
+			}
+			
 			if (isset($this->getParent()[Form::MUTATION_TRANSLATOR_NAME][$mutation])) {
 				$this[$mutation]->addConditionOn($this->getParent()[Form::MUTATION_TRANSLATOR_NAME][$mutation], Form::EQUAL, true)->setRequired($required);
 			} else {
@@ -76,9 +81,11 @@ trait LocaleComponentsTrait
 			$control->getLabelPrototype()->setAttribute('data-mutation', $mutation);
 			$control->getControlPrototype()->setAttribute('data-mutation', $mutation);
 			
-			if ($control instanceof TextBase) {
-				$control->setNullable();
+			if (!($control instanceof TextBase)) {
+				continue;
 			}
+
+			$control->setNullable();
 		}
 		
 		return $container;

@@ -160,7 +160,7 @@ class UploadFile extends \Nette\Forms\Controls\UploadControl implements ISignalR
 				$div->addHtml($this->downloadLink);
 			}
 			
-			$div->addHtml(parent::getControl()->setType('hidden')->setValue($this->filename));
+			$div->addHtml(parent::getControl()->setAttribute('type', 'hidden')->setAttribute('value', $this->filename));
 			
 			if ($this->deleteLink) {
 				$deleteLink = $form->getPresenter()->link($this->lookupPath() . '-delete!');
@@ -168,7 +168,6 @@ class UploadFile extends \Nette\Forms\Controls\UploadControl implements ISignalR
 				$div->addHtml($this->deleteLink);
 			}
 		} else {
-			
 			$div->addHtml(parent::getControl());
 		}
 		

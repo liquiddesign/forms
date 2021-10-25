@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Forms\Controls;
 
-use Forms\FormFactory;
-use Forms\Forms;
 use Forms\LocaleContainer;
 use Nette\Application\UI\BadSignalException;
 use Nette\Application\UI\ISignalReceiver;

@@ -151,14 +151,13 @@ class UploadImage extends \Nette\Forms\Controls\UploadControl implements ISignal
 			$div->addHtml(Html::el('img')
 				->setAttribute('src', $src)
 				->setAttribute('style', $this->thumbSize !== null ? 'max-height:'.$this->thumbSize.'px; max-width:'.$this->thumbSize.'px;' : 0));
-			$div->addHtml(parent::getControl()->setType('hidden')->setValue($this->filename));
+			$div->addHtml(parent::getControl()->setAttribute('type', 'hidden')->setAttribute('value', $this->filename));
 			
 			if ($this->deleteLink) {
 				$link = $form->getPresenter()->link($this->lookupPath() . '-delete!');
 				$this->deleteLink->setAttribute('href', $link);
 				$div->addHtml($this->deleteLink);
 			}
-			
 		} else {
 			$div->addHtml(parent::getControl());
 		}

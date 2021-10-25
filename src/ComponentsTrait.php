@@ -37,11 +37,12 @@ trait ComponentsTrait
 	
 	public function addPerexEdit(string $name, ?string $label = null, ?array $configuration = []): Wysiwyg
 	{
+		$toolbar1 = "undo redo | styleselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | link unlink anchor | copy cut paste pastetext insertcontent code";
 		$init = [
 			'height' => 150,
 			'width' => 1024,
 			'plugins' => ["autolink link", "code"],
-			'toolbar1' => "undo redo | styleselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | link unlink anchor | copy cut paste pastetext insertcontent code",
+			'toolbar1' => $toolbar1,
 			'toolbar2' => "",
 			'setup' => false,
 		];
@@ -153,15 +154,15 @@ trait ComponentsTrait
 		$configuration += [
 			'ajax' => [
 				'url' => $url,
-				'delay' => 250
+				'delay' => 250,
 			],
 			'minimumInputLength' => 2,
-			'allowClear' => true
+			'allowClear' => true,
 		];
 
 		if ($placeholder) {
 			$configuration += [
-				'placeholder' => $placeholder
+				'placeholder' => $placeholder,
 			];
 		}
 

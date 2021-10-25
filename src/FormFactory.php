@@ -10,6 +10,10 @@ use Nette\Localization\Translator;
 
 class FormFactory
 {
+	protected Container $context;
+	
+	protected Request $request;
+
 	/**
 	 * @var string[]
 	 */
@@ -29,10 +33,6 @@ class FormFactory
 	private ?string $flagsExt = null;
 
 	private Translator $translator;
-	
-	protected Container $context;
-	
-	protected Request $request;
 	
 	/**
 	 * @var mixed[]
@@ -99,6 +99,9 @@ class FormFactory
 		return $this->primaryMutation;
 	}
 	
+	/**
+	 * @return int[]|string[]|string[][],null[]
+	 */
 	public function getDefaultFlagsConfiguration(): array
 	{
 		return [$this->flagsPath, $this->flagsExt, $this->flagsMap];

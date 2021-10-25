@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Forms\Bridges;
 
+use Nette\DI\Definitions\ServiceDefinition;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
 
@@ -43,7 +44,7 @@ class FormsDI extends \Nette\DI\CompilerExtension
 		/** @var \Nette\DI\ContainerBuilder $builder */
 		$builder = $this->getContainerBuilder();
 		
-		$pages = $builder->addDefinition($this->prefix('componentFactory'))->setType(\Forms\FormFactory::class);
+		$pages = $builder->addDefinition($this->prefix('componentFactory'), new ServiceDefinition())->setType(\Forms\FormFactory::class);
 		$pages->addSetup('setDefaultMutations', [$config->mutations]);
 		$pages->addSetup('setDefaultUserDir', [$config->userDir]);
 		$pages->addSetup('setWysiwygConfiguration', [
