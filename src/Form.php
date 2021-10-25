@@ -16,6 +16,8 @@ use Nette\Utils\Html;
  * Class Form
  * @property array<callable(static, array|object): void|callable(array|object): void> $onSuccess
  * @property array<callable(static): void> $onAnchor
+ * @property array<callable(static): void> $onError
+ * @property array<callable(static): void> $onRender
  */
 class Form extends \Nette\Application\UI\Form
 {
