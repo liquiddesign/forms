@@ -293,7 +293,6 @@ class Form extends \Nette\Application\UI\Form
 			$checkbox->setHtmlAttribute('onclick', 'formDisableMutation(this.form,"'.$mutation.'","'.self::MUTATION_TRANSLATOR_NAME.'")');
 		});
 		
-		/* @phpstan-ignore-next-line */
 		$this->getForm()->onRender[] = function (Form $form) use ($name): void {
 			foreach ($form->getMutations() as $mutation) {
 				if (!$form[$name][$mutation]->getValue()) {
