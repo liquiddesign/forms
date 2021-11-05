@@ -41,7 +41,6 @@ class FormsDI extends \Nette\DI\CompilerExtension
 		/** @var \stdClass $config */
 		$config = $this->getConfig();
 		
-		/** @var \Nette\DI\ContainerBuilder $builder */
 		$builder = $this->getContainerBuilder();
 		
 		$pages = $builder->addDefinition($this->prefix('componentFactory'), new ServiceDefinition())->setType(\Forms\FormFactory::class);
