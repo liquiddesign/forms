@@ -13,12 +13,14 @@
 		"nette/utils":"~3.0",
 		"nette/di":"~3.0",
 		"nette/component-model":"~3.0",
-		"tracy/tracy":"*",
-		"liquiddesign/storm": "@dev",
-		"ext-pdo": "*"
+		"liquiddesign/storm": "@dev"
+	},
+	"suggest": {
+		"liquiddesign/security": "Allows to use Security Forms"
 	},
 	"require-dev": 
 	{
+		"liquiddesign/security": "@dev",
 		"nette/tester":"*",
 		"tracy/tracy":"*",
 		"composer/composer": "*",
