@@ -13,7 +13,7 @@
 		"nette/utils":"~3.0",
 		"nette/di":"~3.0",
 		"nette/component-model":"~3.0",
-		"liquiddesign/storm": "^1.0"
+		"liquiddesign/storm": "~1.0"
 	},
 	"suggest": {
 		"liquiddesign/security": "Allows to use Security Forms"
