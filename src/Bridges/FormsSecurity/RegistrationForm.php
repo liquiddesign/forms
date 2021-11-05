@@ -29,11 +29,9 @@ class RegistrationForm extends Form
 	
 	protected Nette\Localization\Translator $translator;
 	
-	protected bool $confirmation = false;
+	protected bool $confirmation;
 	
-	protected string $confirmationEmail = '';
-	
-	protected bool $emailAuthorization = true;
+	protected bool $emailAuthorization;
 
 	protected AccountRepository $accountRepository;
 	
@@ -42,6 +40,8 @@ class RegistrationForm extends Form
 	protected Nette\Security\Passwords $passwords;
 	
 	public function __construct(
+		bool $confirmation,
+		bool $emailAuthorization,
 		AccountRepository $accountRepository,
 		Nette\Localization\Translator $translator,
 		Nette\Security\Passwords $passwords,
@@ -53,6 +53,8 @@ class RegistrationForm extends Form
 		$this->mailer = $mailSender;
 		$this->passwords = $passwords;
 		$this->accountRepository = $accountRepository;
+		$this->confirmation = $confirmation;
+		$this->emailAuthorization = $emailAuthorization;
 		
 		$this->addText('login', 'registerForm.login')
 			->addRule($this::UNIQUE_LOGIN, 'registerForm.account.alreadyExists', $accountRepository)
@@ -72,35 +74,6 @@ class RegistrationForm extends Form
 		$this->onComplete[] = [$this, 'sendEmails'];
 	}
 	
-	public function setConfirmation(bool $confirmation = true): void
-	{
-		$this->confirmation = $confirmation;
-	}
-	
-	public function setConfirmationEmail(string $confirmationEmail): void
-	{
-		$this->confirmationEmail = $confirmationEmail;
-	}
-	
-	public function setEmailAuthorization(bool $emailAuthorization): void
-	{
-		$this->emailAuthorization = $emailAuthorization;
-	}
-	
-	public function getConfirmationEmail(): string
-	{
-		return $this->confirmationEmail;
-	}
-	
-	public function isConfirmation(): bool
-	{
-		return $this->confirmation;
-	}
-	
-	public function isEmailAuthorization(): bool
-	{
-		return $this->emailAuthorization;
-	}
 	
 	public function success(Nette\Forms\Form $form): void
 	{

@@ -6,5 +6,5 @@ namespace Forms\Bridges\FormsSecurity;
 
 interface IRegistrationFormFactory
 {
-	public function create(): RegistrationForm;
+	public function create(bool $confirmation = false, bool $emailAuthorization = false): RegistrationForm;
 }

@@ -16,12 +16,13 @@ class SecurityDI extends \Nette\DI\CompilerExtension
 {
 	public function getConfigSchema(): Schema
 	{
-		return Expect::structure([]);
+		return Expect::structure([
+		]);
 	}
 	
 	public function loadConfiguration(): void
 	{
-		if (!class_exists(Account::class)) {
+		if (!\class_exists(Account::class)) {
 			return;
 		}
 		
