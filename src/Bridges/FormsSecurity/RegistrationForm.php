@@ -70,8 +70,6 @@ class RegistrationForm extends Form
 		$this->addSubmit('submit', 'registerForm.submit');
 		
 		$this->onSuccess[] = [$this, 'success'];
-		
-		$this->onComplete[] = [$this, 'sendEmails'];
 	}
 	
 	
