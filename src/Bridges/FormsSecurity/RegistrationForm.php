@@ -71,8 +71,7 @@ class RegistrationForm extends Form
 		
 		$this->onSuccess[] = [$this, 'success'];
 	}
-	
-	
+
 	public function success(Nette\Forms\Form $form): void
 	{
 		$values = $form->getValues('array');
