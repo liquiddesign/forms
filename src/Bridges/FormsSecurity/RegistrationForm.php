@@ -10,7 +10,7 @@ use Security\DB\AccountRepository;
 use StORM\Connection;
 
 /**
- * @method onComplete(\Forms\Bridges\FormsSecurity\RegistrationForm $form, ?string $email, ?string $password, ?string $token)
+ * @method onComplete(\Forms\Bridges\FormsSecurity\RegistrationForm $form, ?string $email, ?string $password, bool $confirmation, bool $emailAuthorization, ?string $token)
  * @method onAccountCreated(\Forms\Bridges\FormsSecurity\RegistrationForm $form, \Security\DB\Account $account)
  */
 class RegistrationForm extends Form
@@ -23,7 +23,7 @@ class RegistrationForm extends Form
 	public array $onAccountCreated = [];
 	
 	/**
-	 * @var array<callable(static, ?string, ?string, ?string): void> Called when registration is composer
+	 * @var array<callable(static, ?string, ?string, bool, bool, ?string): void> Called when registration is composer
 	 */
 	public array $onComplete = [];
 	
@@ -95,7 +95,7 @@ class RegistrationForm extends Form
 		
 		$this->onAccountCreated($this, $account);
 		
-		$this->onComplete($this, $email, $password, $token);
+		$this->onComplete($this, $email, $password, $this->confirmation, $this->emailAuthorization, $token);
 	}
 	
 	public static function validateLogin(\Nette\Forms\Control $control, AccountRepository $accountRepository): bool
