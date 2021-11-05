@@ -25,7 +25,6 @@ class SecurityDI extends \Nette\DI\CompilerExtension
 			return;
 		}
 		
-		
 		$builder = $this->getContainerBuilder();
 		
 		$builder->addFactoryDefinition($this->prefix('loginFormFactory'))->setImplement(ILoginFormFactory::class);
