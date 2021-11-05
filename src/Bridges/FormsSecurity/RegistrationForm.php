@@ -15,7 +15,7 @@ use StORM\Connection;
  */
 class RegistrationForm extends Form
 {
-	public const UNIQUE_LOGIN = '\Security\Control\RegistrationForm::validateLogin';
+	public const UNIQUE_LOGIN = '\Forms\Bridges\FormsSecurity\RegistrationForm::validateLogin';
 	
 	/**
 	 * @var array<callable(static, \Security\DB\Account): void> Called when account is created
