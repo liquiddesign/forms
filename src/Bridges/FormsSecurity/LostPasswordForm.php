@@ -15,7 +15,7 @@ use StORM\Repository;
  */
 class LostPasswordForm extends \Nette\Application\UI\Form
 {
-	public const EMAIL_EXISTS = '\Security\Control\LostPasswordForm::validateEmail';
+	public const EMAIL_EXISTS = '\Forms\Bridges\FormsSecurity\LostPasswordForm::validateEmail';
 	
 	/**
 	 * @var array<callable(static): void> Called when recover success
