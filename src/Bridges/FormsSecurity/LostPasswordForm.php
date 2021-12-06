@@ -57,7 +57,7 @@ class LostPasswordForm extends \Nette\Application\UI\Form
 			->addRule(
 				$this::EMAIL_EXISTS,
 				$translator->translate('lostPasswordForm.emailNotFound', 'Email nenalezen!'),
-				$this->repository,
+				$this->accountRepository,
 			)
 			->setRequired();
 		
@@ -72,7 +72,7 @@ class LostPasswordForm extends \Nette\Application\UI\Form
 		
 		$this->token = Nette\Utils\Random::generate(128);
 		
-		$this->accountRepository->many()->match(['login', $values['email']])->update(['confirmationToken' => $this->token]);
+		$this->accountRepository->many()->match(['login' => $values['email']])->update(['confirmationToken' => $this->token]);
 		
 		$this->onRecover($this);
 	}
