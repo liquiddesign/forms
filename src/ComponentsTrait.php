@@ -37,13 +37,13 @@ trait ComponentsTrait
 	
 	public function addPerexEdit(string $name, ?string $label = null, ?array $configuration = []): Wysiwyg
 	{
-		$toolbar1 = "undo redo | styleselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | link unlink anchor | copy cut paste pastetext insertcontent code";
+		$toolbar1 = 'undo redo | styleselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | link unlink anchor | copy cut paste pastetext insertcontent code';
 		$init = [
 			'height' => 150,
 			'width' => 1024,
-			'plugins' => ["autolink link", "code"],
+			'plugins' => ['autolink link', 'code'],
 			'toolbar1' => $toolbar1,
-			'toolbar2' => "",
+			'toolbar2' => '',
 			'setup' => false,
 		];
 		
@@ -203,7 +203,7 @@ trait ComponentsTrait
 		
 		$selectbox = $this->addMultiSelect($name, $label, $items);
 		$this->getForm()->addPolyfill('multiselect2', $selectbox->getHtmlId(), $configuration + $default);
-		$this->getForm()->addPolyfill('multiselect2'. $this->getForm()->getAdminLang(), $selectbox->getHtmlId(), []);
+		$this->getForm()->addPolyfill('multiselect2' . $this->getForm()->getAdminLang(), $selectbox->getHtmlId(), []);
 		$selectbox->setHtmlAttribute('class', 'multiselect2');
 		
 		return $selectbox;

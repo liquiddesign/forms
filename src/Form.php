@@ -280,7 +280,7 @@ class Form extends \Nette\Application\UI\Form
 				$checkbox->setHtmlAttribute('style', 'display:none;');
 				$checkbox->getLabelPrototype()->setAttribute('style', 'position: relative; left: -1.25rem');
 			} else {
-				$checkbox->setHtmlAttribute('onclick', 'formDisableMutation(this.form,"'.$mutation.'","'.self::MUTATION_TRANSLATOR_NAME.'")');
+				$checkbox->setHtmlAttribute('onclick', 'formDisableMutation(this.form,"' . $mutation . '","' . self::MUTATION_TRANSLATOR_NAME . '")');
 			}
 		});
 		
@@ -290,7 +290,7 @@ class Form extends \Nette\Application\UI\Form
 		});
 		
 		$localeContainer->forSecondary(function (Checkbox $checkbox, $mutation): void {
-			$checkbox->setHtmlAttribute('onclick', 'formDisableMutation(this.form,"'.$mutation.'","'.self::MUTATION_TRANSLATOR_NAME.'")');
+			$checkbox->setHtmlAttribute('onclick', 'formDisableMutation(this.form,"' . $mutation . '","' . self::MUTATION_TRANSLATOR_NAME . '")');
 		});
 		
 		$this->getForm()->onRender[] = function (Form $form) use ($name): void {

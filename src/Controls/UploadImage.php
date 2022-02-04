@@ -9,6 +9,7 @@ use Nette\Application\UI\BadSignalException;
 use Nette\Application\UI\ISignalReceiver;
 use Nette\Forms\Form;
 use Nette\Http\FileUpload;
+use Nette\Utils\FileSystem;
 use Nette\Utils\Html;
 use Nette\Utils\Image;
 use Nette\Utils\Random;
@@ -45,14 +46,14 @@ class UploadImage extends \Nette\Forms\Controls\UploadControl implements ISignal
 		$this->addRule(\Nette\Forms\Form::IMAGE);
 		$this->directories = $directories;
 		$this->infoText = $infoText;
-		$this->deleteLink = Html::el('a')->setAttribute("class", "btn btn-sm btn-danger button");
+		$this->deleteLink = Html::el('a')->setAttribute('class', 'btn btn-sm btn-danger button');
 		
 		$element = $this;
 		
 		$this->monitor(\Nette\Forms\Form::class, function ($form) use ($element): void {
 			$element->onDelete[] = static function ($directories, $filename) use ($form): void {
 				foreach (\array_keys($directories) as $directory) {
-					@\unlink($form->getUserDir() . \DIRECTORY_SEPARATOR . $directory . \DIRECTORY_SEPARATOR . $filename);
+					FileSystem::delete($form->getUserDir() . \DIRECTORY_SEPARATOR . $directory . \DIRECTORY_SEPARATOR . $filename);
 				}
 			};
 			
@@ -144,13 +145,13 @@ class UploadImage extends \Nette\Forms\Controls\UploadControl implements ISignal
 		/** @var \Forms\Form $form */
 		$form = $this->getForm();
 		
-		$div = Html::el("div")->setAttribute('id', $this->getHtmlId() . '-container')->setAttribute('class', 'upload-image-container');
+		$div = Html::el('div')->setAttribute('id', $this->getHtmlId() . '-container')->setAttribute('class', 'upload-image-container');
 		
 		if ($this->filename) {
 			$src = $this->thumbBaseUrl . '/' . $this->filename . '?' . Random::generate();
 			$div->addHtml(Html::el('img')
 				->setAttribute('src', $src)
-				->setAttribute('style', $this->thumbSize !== null ? 'max-height:'.$this->thumbSize.'px; max-width:'.$this->thumbSize.'px;' : 0));
+				->setAttribute('style', $this->thumbSize !== null ? 'max-height:' . $this->thumbSize . 'px; max-width:' . $this->thumbSize . 'px;' : 0));
 			$div->addHtml(parent::getControl()->setAttribute('type', 'hidden')->setAttribute('value', $this->filename));
 			
 			if ($this->deleteLink) {

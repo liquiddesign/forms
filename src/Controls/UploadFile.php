@@ -10,6 +10,7 @@ use Nette\Application\UI\BadSignalException;
 use Nette\Application\UI\ISignalReceiver;
 use Nette\Forms\Form;
 use Nette\Http\FileUpload;
+use Nette\Utils\FileSystem;
 use Nette\Utils\Html;
 
 /**
@@ -38,14 +39,14 @@ class UploadFile extends \Nette\Forms\Controls\UploadControl implements ISignalR
 		
 		$this->infoText = $infoText;
 		$this->directory = $directory;
-		$this->deleteLink = Html::el('a')->setAttribute("class", 'btn btn-sm btn-danger button');
+		$this->deleteLink = Html::el('a')->setAttribute('class', 'btn btn-sm btn-danger button');
 		$this->downloadLink = Html::el('a')->setAttribute('class', 'download-link');
 		
 		$element = $this;
 		
 		$this->monitor(\Nette\Forms\Form::class, function ($form) use ($element): void {
 			$element->onDelete[] = static function ($directory, $filename) use ($form): void {
-				@\unlink($form->getUserDir() . \DIRECTORY_SEPARATOR . $directory . \DIRECTORY_SEPARATOR . $filename);
+				FileSystem::delete($form->getUserDir() . \DIRECTORY_SEPARATOR . $directory . \DIRECTORY_SEPARATOR . $filename);
 			};
 			
 			$element->deleteLink->setText($form->getTranslator() ? $form->getTranslator()->translate('delete') : 'delete');
@@ -151,7 +152,7 @@ class UploadFile extends \Nette\Forms\Controls\UploadControl implements ISignalR
 		/** @var \Nette\Application\UI\Form $form */
 		$form = $this->getForm();
 		
-		$div = Html::el("div");
+		$div = Html::el('div');
 		
 		if ($this->filename) {
 			if ($this->downloadLink) {

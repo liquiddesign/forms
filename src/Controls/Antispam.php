@@ -71,7 +71,7 @@ class Antispam extends HiddenField
 		$wrapper->addHtml($elFrom);
 		$wrapper->addHtml($elTo);
 		
-		$wrapper->addHtml('<script>document.getElementById("'.$this->getHtmlId().'year_as").value = "'.\date('Y').'";</script>');
+		$wrapper->addHtml('<script>document.getElementById("' . $this->getHtmlId() . 'year_as").value = "' . \date('Y') . '";</script>');
 		
 		return $wrapper;
 	}
