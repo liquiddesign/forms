@@ -10,6 +10,7 @@ use Nette\Utils\Html;
 class Range extends BaseControl
 {
 	protected int $min;
+
 	protected int $max;
 	
 	public function __construct($caption = null, int $min = 0, int $max = 100)

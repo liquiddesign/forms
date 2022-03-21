@@ -28,13 +28,13 @@ class LoginForm extends \Nette\Application\UI\Form
 	protected Nette\Security\User $user;
 	
 	/**
-	 * @var string[]
+	 * @var array<string>
 	 */
 	protected array $classes;
 	
 	/**
 	 * LoginForm constructor.
-	 * @param string[] $classes
+	 * @param array<string> $classes
 	 * @param \Nette\Security\User $user
 	 */
 	public function __construct(array $classes, Nette\Security\User $user)

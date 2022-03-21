@@ -16,7 +16,7 @@ use Nette\Forms\Controls\TextArea;
 class Wysiwyg extends TextArea implements ISignalReceiver
 {
 	/**
-	 * @var callable[]
+	 * @var array<callable>
 	 */
 	public array $onSave = [];
 	

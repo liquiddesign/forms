@@ -15,7 +15,7 @@ class FormFactory
 	protected Request $request;
 
 	/**
-	 * @var string[]
+	 * @var array<string>
 	 */
 	private array $defaultMutations = [];
 	
@@ -24,7 +24,7 @@ class FormFactory
 	private string $userDir;
 	
 	/**
-	 * @var string[]
+	 * @var array<string>
 	 */
 	private array $flagsMap = [];
 	
@@ -35,7 +35,7 @@ class FormFactory
 	private Translator $translator;
 	
 	/**
-	 * @var mixed[]
+	 * @var array<mixed>
 	 */
 	private array $wysiwygConfiguration;
 	
@@ -52,10 +52,10 @@ class FormFactory
 	}
 	
 	/**
-	 * @param mixed[] $filemanager
-	 * @param mixed[] $widgets
-	 * @param string[] $contentCss
-	 * @param string[] $templates
+	 * @param array<mixed> $filemanager
+	 * @param array<mixed> $widgets
+	 * @param array<string> $contentCss
+	 * @param array<string> $templates
 	 */
 	public function setWysiwygConfiguration(array $filemanager, array $widgets, array $contentCss, array $templates, ?string $tinyConfig): void
 	{
@@ -64,7 +64,7 @@ class FormFactory
 	
 	/**
 	 * @param string|null $index
-	 * @return mixed[]|null
+	 * @return array<mixed>|null
 	 */
 	public function getWysiwygConfiguration(?string $index = null): ?array
 	{
@@ -87,7 +87,7 @@ class FormFactory
 	}
 	
 	/**
-	 * @return array|string[]
+	 * @return array<string>
 	 */
 	public function getDefaultMutations(): array
 	{
@@ -100,7 +100,7 @@ class FormFactory
 	}
 	
 	/**
-	 * @return int[]|string[]|string[][],null[]
+	 * @return array<int>|array<string>|array<array<string>> ,null[]
 	 */
 	public function getDefaultFlagsConfiguration(): array
 	{

@@ -20,7 +20,7 @@ use Nette\Utils\Random;
 class UploadImage extends \Nette\Forms\Controls\UploadControl implements ISignalReceiver
 {
 	/**
-	 * @var callable[]
+	 * @var array<callable>
 	 */
 	public array $onDelete = [];
 	
@@ -33,7 +33,7 @@ class UploadImage extends \Nette\Forms\Controls\UploadControl implements ISignal
 	protected ?int $thumbSize = 50;
 	
 	/**
-	 * @var string[]
+	 * @var array<string>
 	 */
 	protected array $directories;
 	

@@ -33,12 +33,12 @@ class Form extends \Nette\Application\UI\Form
 	protected ?string $flagsExt = null;
 	
 	/**
-	 * @var string[]
+	 * @var array<string>
 	 */
 	protected array $flagsMap = [];
 	
 	/**
-	 * @var int[]|string[]|string[][],null[]
+	 * @var array<int>|array<string>|array<array<string>> ,null[]
 	 */
 	protected array $wysiwygConfiguration = [
 		'contentCss' => [],
@@ -52,12 +52,12 @@ class Form extends \Nette\Application\UI\Form
 	protected ?string $primaryMutation = null;
 	
 	/**
-	 * @var string[]
+	 * @var array<string>
 	 */
 	protected array $mutations;
 	
 	/**
-	 * @var mixed[][]
+	 * @var array<array<mixed>>
 	 */
 	protected array $polyfills = [];
 
@@ -136,7 +136,7 @@ class Form extends \Nette\Application\UI\Form
 	}
 	
 	/**
-	 * @return mixed[][]
+	 * @return array<array<mixed>>
 	 */
 	public function getPolyfills(): array
 	{
@@ -154,7 +154,7 @@ class Form extends \Nette\Application\UI\Form
 	}
 	
 	/**
-	 * @param string[] $mutations
+	 * @param array<string> $mutations
 	 */
 	public function setMutations(array $mutations): void
 	{
@@ -166,7 +166,7 @@ class Form extends \Nette\Application\UI\Form
 	}
 	
 	/**
-	 * @return string[]
+	 * @return array<string>
 	 */
 	public function getMutations(): array
 	{
@@ -208,7 +208,7 @@ class Form extends \Nette\Application\UI\Form
 	}
 	
 	/**
-	 * @return int[]|string[]|string[][],null[]
+	 * @return array<int>|array<string>|array<array<string>> ,null[]
 	 */
 	public function getWysiwygConfiguration(): array
 	{
@@ -349,7 +349,7 @@ class Form extends \Nette\Application\UI\Form
 	}
 	
 	/**
-	 * @param string[]|null $mutations
+	 * @param array<string>|null $mutations
 	 */
 	public function setReadonly(?array $mutations = null): void
 	{

@@ -20,11 +20,11 @@
 	},
 	"require-dev": 
 	{
-		"liquiddesign/security": "@dev",
+		"liquiddesign/security": "~1.0",
 		"nette/tester":"*",
 		"tracy/tracy":"*",
 		"composer/composer": "*",
-		"liquiddesign/codestyle": "@dev",
+		"liquiddesign/codestyle": "~1.0",
 		"phpstan/phpstan": "*"
 	},
 	"scripts": {
@@ -32,5 +32,10 @@
 		"phpcs": "phpcs --standard=ruleset.xml --ignore=assets src",
 		"phpcsfix": "phpcbf --standard=ruleset.xml --ignore=assets src",
 		"tester": "tester tests/Tests/*.phpt  -c tests/php.ini --setup tests/setup.php"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
 	}
 }

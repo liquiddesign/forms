@@ -19,7 +19,7 @@ use Nette\Utils\Html;
 class UploadFile extends \Nette\Forms\Controls\UploadControl implements ISignalReceiver
 {
 	/**
-	 * @var callable[]
+	 * @var array<callable>
 	 */
 	public array $onDelete = [];
 	

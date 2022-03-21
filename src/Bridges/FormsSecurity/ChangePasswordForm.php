@@ -37,6 +37,7 @@ class ChangePasswordForm extends \Nette\Application\UI\Form
 			throw new \InvalidArgumentException("Wrong or empty class: $class");
 		}
 		
+		// @phpstan-ignore-next-line
 		$this->repository = $this->connection->findRepository($class);
 		
 		$this->addPassword('oldPassword')
