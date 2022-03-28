@@ -72,13 +72,16 @@ class LostPasswordForm extends \Nette\Application\UI\Form
 		
 		$this->token = Nette\Utils\Random::generate(128);
 		
-		$this->accountRepository->many()->match(['login' => $values['email']])->update(['confirmationToken' => $this->token]);
+		$this->accountRepository->one(['login' => $values['email']])->update(['confirmationToken' => $this->token]);
 		
 		$this->onRecover($this);
 	}
 	
 	public static function validateEmail(\Nette\Forms\Control $control, Repository $repository): bool
 	{
-		return !$repository->many()->match(['login' => $control->getValue()])->isEmpty();
+		/** @var \Security\DB\Account|null $account */
+		$account = $repository->one(['login' => $control->getValue()]);
+
+		return $account && $account->isActive() && $account->authorized;
 	}
 }
