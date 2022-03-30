@@ -82,6 +82,6 @@ class LostPasswordForm extends \Nette\Application\UI\Form
 		/** @var \Security\DB\Account|null $account */
 		$account = $repository->one(['login' => $control->getValue()]);
 
-		return $account && $account->isActive() && $account->authorized;
+		return $account && $account->isActive();
 	}
 }
