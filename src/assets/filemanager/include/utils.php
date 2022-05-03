@@ -869,6 +869,12 @@ function image_check_memory_usage($img, $max_breedte, $max_hoogte)
 {
 	if (file_exists($img))
 	{
+		$info = pathinfo($img);
+		
+		if ($info['extension'] === 'svg') {
+			return true;
+		}
+		
 		$K64 = 65536; // number of bytes in 64K
 		$memory_usage = memory_get_usage();
 		if(ini_get('memory_limit') > 0 ){
