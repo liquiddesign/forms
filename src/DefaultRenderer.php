@@ -10,7 +10,7 @@ use Nette\Utils\Html;
 
 class DefaultRenderer extends DefaultFormRenderer
 {
-	public function renderPair(\Nette\Forms\IControl $control): string
+	public function renderPair(\Nette\Forms\Control $control): string
 	{
 		
 		$pair = $this->getWrapper('pair container');
@@ -48,7 +48,7 @@ class DefaultRenderer extends DefaultFormRenderer
 		return $pair->render(0);
 	}
 	
-	public function renderLabel(\Nette\Forms\IControl $control): Html
+	public function renderLabel(\Nette\Forms\Control $control): Html
 	{
 		$html = parent::renderLabel($control);
 		
