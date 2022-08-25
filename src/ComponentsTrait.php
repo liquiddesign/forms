@@ -50,7 +50,7 @@ trait ComponentsTrait
 		return $this->addRichEdit($name, $label, $configuration + $init);
 	}
 	
-	public function addDate(string $name, ?string $label = null, ?array $configuration = []): TextInput
+	public function addDate(string $name, ?string $label = null, ?array $configuration = ['altFormat' => 'd.m.Y']): TextInput
 	{
 		$textbox = $this->addText($name, $label);
 		
