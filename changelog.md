@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **BREAKING:** PHP version 8.2 or higher is required
+- **BREAKING:** PHP version 8.0 or higher is required
 
 ### Fixed
-- File manager fixes for PHP 8.2
+- File manager fixes for PHP 8.0
