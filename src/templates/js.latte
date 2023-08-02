@@ -28,7 +28,7 @@
 				{foreach $polyfill as $id => $configuration}
 					{if $configuration !== null}
 						{if $name === 'flatpickr'}
-        					polyfills[{$id}] = flatpickr("#{$id|noescape}", {($configuration ? \json_encode($configuration) : '{}')|noescape});
+        					polyfills[{$id}] = flatpickr('#' . {$id|noescape}, {($configuration ? \json_encode($configuration) : '{}')|noescape});
 						{/if}
 						{if $name === 'nouislider'}
         					polyfills[{$id}] = noUiSlider.create(document.getElementById({$id}), {\json_encode($configuration)|noescape});
@@ -45,13 +45,13 @@
 							});
 						{/if}
 						{if $name === 'tail.select'}
-        					polyfills[{$id}] = tail.select("#{$id|noescape}", {\json_encode($configuration)|noescape});
+        					polyfills[{$id}] = tail.select('#' . {$id|noescape}, {\json_encode($configuration)|noescape});
 						{/if}
 						{if $name === 'multiselect2'}
 							$('#' + {$id}).select2({\json_encode($configuration)|noescape});
 						{/if}
 						{if $name === 'tinymce'}
-        					polyfills[{$id}] = initTinyMCExconf("#{$id|noescape}", {\json_encode($configuration)|noescape});
+        					polyfills[{$id}] = initTinyMCExconf('#' . {$id|noescape}, {\json_encode($configuration)|noescape});
 						{/if}
 					{/if}
 				{/foreach}
