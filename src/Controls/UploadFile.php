@@ -12,6 +12,7 @@ use Nette\Forms\Form;
 use Nette\Http\FileUpload;
 use Nette\Utils\FileSystem;
 use Nette\Utils\Html;
+use Nette\Utils\Strings;
 
 /**
  * @method onDelete(string $directory, $filename)
@@ -59,7 +60,7 @@ class UploadFile extends \Nette\Forms\Controls\UploadControl implements ISignalR
 	 * @param mixed $value
 	 * @return static
 	 */
-	public function setValue($value)
+	public function setValue($value): static
 	{
 		$this->filename = $value;
 		
@@ -91,7 +92,7 @@ class UploadFile extends \Nette\Forms\Controls\UploadControl implements ISignalR
 			/** @var \Forms\Form $form */
 			$form = $this->getForm();
 			
-			$filename = \sprintf($filenameFormat, \pathinfo($upload->getSanitizedName(), \PATHINFO_BASENAME), \strtolower(\pathinfo($upload->getSanitizedName(), \PATHINFO_EXTENSION)));
+			$filename = \sprintf($filenameFormat, \pathinfo($upload->getSanitizedName(), \PATHINFO_BASENAME), Strings::lower(\pathinfo($upload->getSanitizedName(), \PATHINFO_EXTENSION)));
 			$filepath = $form->getUserDir() . \DIRECTORY_SEPARATOR . $this->directory . \DIRECTORY_SEPARATOR . $filename;
 			$upload->move($filepath);
 		}

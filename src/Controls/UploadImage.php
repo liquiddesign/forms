@@ -13,6 +13,7 @@ use Nette\Utils\FileSystem;
 use Nette\Utils\Html;
 use Nette\Utils\Image;
 use Nette\Utils\Random;
+use Nette\Utils\Strings;
 
 /**
  * @method onDelete(array $directories, $filename)
@@ -86,7 +87,7 @@ class UploadImage extends \Nette\Forms\Controls\UploadControl implements ISignal
 	 * @param mixed $value
 	 * @return static
 	 */
-	public function setValue($value)
+	public function setValue($value): static
 	{
 		$this->filename = $value;
 		
@@ -179,7 +180,7 @@ class UploadImage extends \Nette\Forms\Controls\UploadControl implements ISignal
 			$filename = null;
 			
 			foreach ($directories as $directory => $resizeClosure) {
-				$filename = \sprintf($filenameFormat, \pathinfo($upload->getSanitizedName(), \PATHINFO_BASENAME), \strtolower(\pathinfo($upload->getSanitizedName(), \PATHINFO_EXTENSION)));
+				$filename = \sprintf($filenameFormat, \pathinfo($upload->getSanitizedName(), \PATHINFO_BASENAME), Strings::lower(\pathinfo($upload->getSanitizedName(), \PATHINFO_EXTENSION)));
 				$filepath = $userDir . \DIRECTORY_SEPARATOR . $directory . \DIRECTORY_SEPARATOR . $filename;
 				
 				$image = Image::fromFile($upload->getTemporaryFile());

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Forms\Bridges\FormsSecurity;
 
+use Base\ShopsConfig;
 use Forms\Form;
 use Nette;
 use Security\DB\AccountRepository;
@@ -16,7 +17,7 @@ use StORM\Connection;
 class RegistrationForm extends Form
 {
 	public const UNIQUE_LOGIN = '\Forms\Bridges\FormsSecurity\RegistrationForm::validateLogin';
-	
+
 	/**
 	 * @var array<callable(static, \Security\DB\Account): void> Called when account is created
 	 */
@@ -27,36 +28,21 @@ class RegistrationForm extends Form
 	 */
 	public array $onComplete = [];
 	
-	protected Nette\Localization\Translator $translator;
-	
-	protected bool $confirmation;
-	
-	protected bool $emailAuthorization;
-
-	protected AccountRepository $accountRepository;
-	
-	protected Nette\Mail\Mailer $mailer;
-	
-	protected Nette\Security\Passwords $passwords;
-	
 	public function __construct(
-		bool $confirmation,
-		bool $emailAuthorization,
-		AccountRepository $accountRepository,
-		Nette\Localization\Translator $translator,
-		Nette\Security\Passwords $passwords,
-		Nette\Mail\Mailer $mailSender
+		protected readonly bool $confirmation,
+		protected readonly bool $emailAuthorization,
+		/**
+		 * @var \Security\DB\AccountRepository<\Security\DB\Account>
+		 */
+		protected readonly AccountRepository $accountRepository,
+		protected readonly Nette\Localization\Translator $translator,
+		protected readonly Nette\Security\Passwords $passwords,
+		protected readonly Nette\Mail\Mailer $mailSender,
+		protected readonly ShopsConfig $shopsConfig
 	) {
 		parent::__construct();
-		
-		$this->translator = $translator;
-		$this->mailer = $mailSender;
-		$this->passwords = $passwords;
-		$this->accountRepository = $accountRepository;
-		$this->confirmation = $confirmation;
-		$this->emailAuthorization = $emailAuthorization;
-		
-		$this->addText('login', 'registerForm.login')
+
+		$loginInput = $this->addText('login', 'registerForm.login')
 			->addRule($this::UNIQUE_LOGIN, 'registerForm.account.alreadyExists', $accountRepository)
 			->setRequired();
 		
@@ -68,12 +54,35 @@ class RegistrationForm extends Form
 		$this->addAntispam('registerForm.badAntispam');
 		
 		$this->addSubmit('submit', 'registerForm.submit');
+
+		$this->onValidate[] = function (Nette\Forms\Container $form) use ($loginInput): void {
+			if (!$form->getValues()) {
+				return;
+			}
+
+			/** @var array<mixed> $values */
+			$values = $form->getValues('array');
+
+			$query = $this->accountRepository->many()->where('this.login', $values['login']);
+
+			$this->shopsConfig->filterShopsInShopEntityCollection($query);
+
+			/** @var \Security\DB\Account|null $account */
+			$account = $query->first();
+
+			if (!$account) {
+				return;
+			}
+
+			$loginInput->addError($this->translator->translate('registerForm.account.alreadyExists'));
+		};
 		
 		$this->onSuccess[] = [$this, 'success'];
 	}
 
 	public function success(Nette\Forms\Form $form): void
 	{
+		/** @var array<mixed> $values */
 		$values = $form->getValues('array');
 		$email = $values['email'] ?? $values['login'];
 		$password = $values['password'] ?? Nette\Utils\Random::generate(8);
@@ -88,15 +97,11 @@ class RegistrationForm extends Form
 			'active' => !$this->confirmation,
 			'authorized' => !$this->emailAuthorization,
 			'confirmationToken' => $token,
+			'shop' => $this->shopsConfig->getSelectedShop()?->getPK(),
 		]);
 		
 		$this->onAccountCreated($this, $account);
 		
 		$this->onComplete($this, $email, $password, $this->confirmation, $this->emailAuthorization, $token);
-	}
-	
-	public static function validateLogin(\Nette\Forms\Control $control, AccountRepository $accountRepository): bool
-	{
-		return $accountRepository->many()->match(['login' => $control->getValue()])->isEmpty();
 	}
 }

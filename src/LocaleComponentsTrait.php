@@ -6,6 +6,7 @@ namespace Forms;
 
 use Nette\Forms\Controls\BaseControl;
 use Nette\Forms\Controls\TextBase;
+use Nette\Utils\Strings;
 
 /**
  * Trait LocaleComponentsTrait
@@ -73,7 +74,7 @@ trait LocaleComponentsTrait
 		foreach ($mutations as $mutation) {
 			$argMutation = \array_merge([$mutation], $args);
 			
-			$method = $prefix . \ucfirst($controlName);
+			$method = $prefix . Strings::firstUpper($controlName);
 			
 			/** @var \Nette\Forms\Controls\BaseControl $control */
 			$control = $container->$method(...$argMutation);
@@ -94,15 +95,14 @@ trait LocaleComponentsTrait
 	/**
 	 * @param mixed $name
 	 * @param mixed $arguments
-	 * @return mixed
 	 */
-	public function __call($name, $arguments)
+	public function __call($name, $arguments): mixed
 	{
 		$prefix = 'addLocale';
-		$controlName = (string) \substr($name, \strlen($prefix));
+		$controlName = (string) Strings::substring($name, Strings::length($prefix));
 		
-		if ($prefix === \substr($name, 0, \strlen($prefix)) && \method_exists($this, 'add' . $controlName)) {
-			return $this->addLocaleControls($this->getForm()->getPrimaryMutation(), $this->getForm()->getMutations(), \strtolower($controlName), $arguments);
+		if ($prefix === Strings::substring($name, 0, Strings::length($prefix)) && \method_exists($this, 'add' . $controlName)) {
+			return $this->addLocaleControls($this->getForm()->getPrimaryMutation(), $this->getForm()->getMutations(), Strings::lower($controlName), $arguments);
 		}
 		
 		/** @noinspection PhpUndefinedClassInspection */

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Forms\Bridges\FormsSecurity;
 
+use Base\ShopsConfig;
 use Nette;
 use Security\DB\AccountRepository;
 use Security\DB\IUser;
@@ -15,8 +16,6 @@ use StORM\Repository;
  */
 class LostPasswordForm extends \Nette\Application\UI\Form
 {
-	public const EMAIL_EXISTS = '\Forms\Bridges\FormsSecurity\LostPasswordForm::validateEmail';
-	
 	/**
 	 * @var array<callable(static): void> Called when recover success
 	 */
@@ -35,6 +34,7 @@ class LostPasswordForm extends \Nette\Application\UI\Form
 		Nette\Localization\Translator $translator,
 		Nette\Mail\Mailer $mailer,
 		AccountRepository $accountRepository,
+		ShopsConfig $shopsConfig,
 		?string $class = null
 	) {
 		parent::__construct();
@@ -52,14 +52,30 @@ class LostPasswordForm extends \Nette\Application\UI\Form
 			$this->repository = $accountRepository;
 		}
 		
-		$this->addText('email', $translator->translate('lostPasswordForm.email', 'Email'))
+		$emailInput = $this->addText('email', $translator->translate('lostPasswordForm.email', 'Email'))
 			->addRule($this::EMAIL)
-			->addRule(
-				$this::EMAIL_EXISTS,
-				$translator->translate('lostPasswordForm.emailNotFound', 'Email nenalezen!'),
-				$this->accountRepository,
-			)
 			->setRequired();
+
+		$this->onValidate[] = function (LostPasswordForm $form) use ($shopsConfig, $emailInput, $translator): void {
+			if (!$form->getValues()) {
+				return;
+			}
+
+			$values = $form->getValues('array');
+
+			$query = $this->accountRepository->many()->where('this.login', $values['email']);
+			
+			$shopsConfig->filterShopsInShopEntityCollection($query);
+
+			/** @var \Security\DB\Account|null $account */
+			$account = $query->first();
+			
+			if ($account && $account->isActive()) {
+				return;
+			}
+
+			$emailInput->addError($translator->translate('lostPasswordForm.emailNotFound', 'Email nenalezen!'));
+		};
 		
 		$this->addSubmit('submit');
 		
@@ -75,13 +91,5 @@ class LostPasswordForm extends \Nette\Application\UI\Form
 		$this->accountRepository->one(['login' => $values['email']])->update(['confirmationToken' => $this->token]);
 		
 		$this->onRecover($this);
-	}
-	
-	public static function validateEmail(\Nette\Forms\Control $control, Repository $repository): bool
-	{
-		/** @var \Security\DB\Account|null $account */
-		$account = $repository->one(['login' => $control->getValue()]);
-
-		return $account && $account->isActive();
 	}
 }

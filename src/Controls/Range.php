@@ -57,9 +57,8 @@ class Range extends BaseControl
 	
 	/**
 	 * Generates control's HTML element.
-	 * @return \Nette\Utils\Html|string
 	 */
-	public function getControl()
+	public function getControl(): \Nette\Utils\Html|string
 	{
 		$this->setOption('rendered', true);
 		

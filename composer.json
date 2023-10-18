@@ -7,28 +7,30 @@
 	},
 	"require" :
 	{
-		"php":">=8.0",
+		"php":">=8.2",
 		"nette/application":"~3.0",
 		"nette/forms":"~3.0",
 		"nette/utils":"~3.0",
 		"nette/di":"~3.0",
 		"nette/component-model":"~3.0",
-		"liquiddesign/storm": "~1.0"
+		"liquiddesign/storm": "~1.0",
+		"liquiddesign/base": "~2.0",
+		"liquiddesign/security": "~2.0"
 	},
-	"suggest": {
-		"liquiddesign/security": "Allows to use Security Forms"
-	},
-	"require-dev": 
+	"require-dev":
 	{
-		"liquiddesign/security": "~1.0",
 		"nette/tester":"*",
 		"tracy/tracy":"*",
 		"composer/composer": "*",
-		"liquiddesign/codestyle": "~1.0",
+		"liquiddesign/codestyle": "~3.0",
 		"phpstan/phpstan": "*"
 	},
 	"scripts": {
-		"phpstan": "phpstan analyse --memory-limit 1G -c phpstan.neon",
+		"fix-code": ["@phpcsfix"],
+		"code-style": ["@phpcsfix", "@phpcs"],
+		"check-code": ["@phpcs", "@phpstan", "@phpstan8"],
+		"phpstan": "phpstan analyse --memory-limit 2G -c phpstan.neon",
+		"phpstan8": "phpstan analyse --memory-limit 2G -c phpstan8.neon",
 		"phpcs": "phpcs --standard=ruleset.xml --ignore=assets src",
 		"phpcsfix": "phpcbf --standard=ruleset.xml --ignore=assets src",
 		"tester": "tester tests/Tests/*.phpt  -c tests/php.ini --setup tests/setup.php"

@@ -1,0 +1,7 @@
+parameters:
+	level: 8
+	paths:
+		- src/Bridges/FormsSecurity/RegistrationForm.php
+	excludePaths:
+		- src/assets/*
+		- src/templates/*

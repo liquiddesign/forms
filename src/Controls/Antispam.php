@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Forms\Controls;
 
+use Carbon\Carbon;
 use Nette\Forms\Controls\HiddenField;
 use Nette\Utils\Html;
 
@@ -33,7 +34,7 @@ class Antispam extends HiddenField
 	 * @return static
 	 * @internal
 	 */
-	public function setValue($value)
+	public function setValue($value): static
 	{
 		unset($value);
 		
@@ -71,7 +72,7 @@ class Antispam extends HiddenField
 		$wrapper->addHtml($elFrom);
 		$wrapper->addHtml($elTo);
 		
-		$wrapper->addHtml('<script>document.getElementById("' . $this->getHtmlId() . 'year_as").value = "' . \date('Y') . '";</script>');
+		$wrapper->addHtml('<script>document.getElementById("' . $this->getHtmlId() . 'year_as").value = "' . Carbon::now()->format('Y') . '";</script>');
 		
 		return $wrapper;
 	}
@@ -91,6 +92,6 @@ class Antispam extends HiddenField
 			return false;
 		}
 		
-		return $form->getHttpData(\Nette\Forms\Form::DATA_TEXT, $control->getHtmlName() . 'year_as') === \date('Y');
+		return $form->getHttpData(\Nette\Forms\Form::DATA_TEXT, $control->getHtmlName() . 'year_as') === Carbon::now()->format('Y');
 	}
 }

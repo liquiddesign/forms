@@ -9,6 +9,7 @@ use Nette\Application\UI\BadSignalException;
 use Nette\Application\UI\ISignalReceiver;
 use Nette\Application\UI\Presenter;
 use Nette\Forms\Controls\TextArea;
+use Nette\Utils\Arrays;
 
 /**
  * @method onSave(string $content, ?string $lang)
@@ -54,7 +55,7 @@ class Wysiwyg extends TextArea implements ISignalReceiver
 		}
 		
 		if ($signal === 'save') {
-			$this->onSave($post['content'], $this->getParent() instanceof LocaleContainer && \in_array($post['lang'], $form->getMutations()) ? $post['lang'] : null);
+			$this->onSave($post['content'], $this->getParent() instanceof LocaleContainer && Arrays::contains($form->getMutations(), $post['lang']) ? $post['lang'] : null);
 			
 			return;
 		}
