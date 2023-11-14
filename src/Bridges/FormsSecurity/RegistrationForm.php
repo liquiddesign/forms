@@ -25,6 +25,12 @@ class RegistrationForm extends Form
 	 * @var array<callable(static, ?string, ?string, bool, bool, ?string): void> Called when registration is composer
 	 */
 	public array $onComplete = [];
+
+	/**
+	 * Occurs when the form was validated
+	 * @var array<callable(self, array|object): void|callable(array|object): void>
+	 */
+	public $onValidate = [];
 	
 	public function __construct(
 		protected readonly bool $confirmation,
@@ -52,7 +58,7 @@ class RegistrationForm extends Form
 		
 		$this->addSubmit('submit', 'registerForm.submit');
 
-		$this->onValidate[] = function (Nette\Forms\Container $form) use ($loginInput): void {
+		$this->onValidate[] = function (RegistrationForm $form) use ($loginInput): void {
 			if (!$form->getValues()) {
 				return;
 			}
@@ -71,7 +77,8 @@ class RegistrationForm extends Form
 				return;
 			}
 
-			$loginInput->addError($this->translator->translate('registerForm.account.alreadyExists'));
+			$loginInput->addError($this->translator->translate('registerForm.accountAlreadyExists', 'Účet s tímto loginem již existuje.'));
+			$form->addError($this->translator->translate('registerForm.accountAlreadyExists', 'Účet s tímto loginem již existuje.'));
 		};
 		
 		$this->onSuccess[] = [$this, 'success'];

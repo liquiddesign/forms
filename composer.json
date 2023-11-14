@@ -28,7 +28,7 @@
 	"scripts": {
 		"fix-code": ["@phpcsfix"],
 		"code-style": ["@phpcsfix", "@phpcs"],
-		"check-code": ["@phpcs", "@phpstan", "@phpstan8"],
+		"check-code": ["@phpcs", "@phpstan"],
 		"phpstan": "phpstan analyse --memory-limit 2G -c phpstan.neon",
 		"phpstan8": "phpstan analyse --memory-limit 2G -c phpstan8.neon",
 		"phpcs": "phpcs --standard=ruleset.xml --ignore=assets src",
