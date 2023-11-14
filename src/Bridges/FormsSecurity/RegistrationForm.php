@@ -16,8 +16,6 @@ use StORM\Connection;
  */
 class RegistrationForm extends Form
 {
-	public const UNIQUE_LOGIN = '\Forms\Bridges\FormsSecurity\RegistrationForm::validateLogin';
-
 	/**
 	 * @var array<callable(static, \Security\DB\Account): void> Called when account is created
 	 */
@@ -43,7 +41,6 @@ class RegistrationForm extends Form
 		parent::__construct();
 
 		$loginInput = $this->addText('login', 'registerForm.login')
-			->addRule($this::UNIQUE_LOGIN, 'registerForm.account.alreadyExists', $accountRepository)
 			->setRequired();
 		
 		$this->addPassword('password', 'registerForm.password');
