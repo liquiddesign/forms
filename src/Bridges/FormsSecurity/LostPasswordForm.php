@@ -57,7 +57,7 @@ class LostPasswordForm extends \Nette\Application\UI\Form
 			->setRequired();
 
 		$this->onValidate[] = function (LostPasswordForm $form) use ($shopsConfig, $emailInput, $translator): void {
-			if (!$form->getValues()) {
+			if (!$form->isValid()) {
 				return;
 			}
 

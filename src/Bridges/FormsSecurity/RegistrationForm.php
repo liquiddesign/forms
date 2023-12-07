@@ -59,7 +59,7 @@ class RegistrationForm extends Form
 		$this->addSubmit('submit', 'registerForm.submit');
 
 		$this->onValidate[] = function (RegistrationForm $form) use ($loginInput): void {
-			if (!$form->getValues()) {
+			if (!$form->isValid()) {
 				return;
 			}
 
