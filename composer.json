@@ -1,51 +1,60 @@
 {
-	"name": "liquiddesign/forms",
-	"description": "Ⓕ Vícejazyčné formuláře do Nette, doplněné o nové prvky, wysiwyg, antispam kontrolu a prevenci doubleclicku",
-	"license": "MIT",
-	"prefer-stable": true,
-	"minimum-stability": "dev",
-	"autoload": {
-		"psr-4": {"Forms\\": "src/"}
-	},
-	"require" :
-	{
-		"php":">=8.2",
-		"nette/application":"~3.0",
-		"nette/forms":"^3.2",
-		"nette/utils":"~4.0",
-		"nette/di":"~3.0",
-		"nette/component-model":"~3.0",
-		"liquiddesign/storm": "~2.0",
-		"liquiddesign/base": "~2.0",
-		"liquiddesign/security": "~2.0"
-	},
-	"require-dev":
-	{
-		"nette/tester":"*",
-		"tracy/tracy":"*",
-		"composer/composer": "*",
-		"liquiddesign/codestyle": "~3.0",
-		"phpstan/phpstan": "*"
-	},
-	"scripts": {
-		"fix-code": ["@phpcsfix"],
-		"code-style": ["@phpcsfix", "@phpcs"],
-		"check-code": ["@phpcs", "@phpstan"],
-		"phpstan": "phpstan analyse --memory-limit 2G -c phpstan.neon",
-		"phpstan8": "phpstan analyse --memory-limit 2G -c phpstan8.neon",
-		"phpcs": "phpcs --standard=ruleset.xml --ignore=assets src",
-		"phpcsfix": "phpcbf --standard=ruleset.xml --ignore=assets src",
-		"tester": "tester tests/Tests/*.phpt  -c tests/php.ini --setup tests/setup.php",
-		"check-commit": "@php ./vendor/liquiddesign/codestyle/src/scripts/check-last-commit.php",
-		"changelog": "conventional-changelog --config=./vendor/liquiddesign/codestyle/src/changelog/changelog-config.php",
-		"release": "@changelog --commit",
-		"release:patch": "@changelog --patch --commit",
-		"release:minor": "@changelog --minor --commit",
-		"release:major": "@changelog --major --commit"
-	},
-	"config": {
-		"allow-plugins": {
-			"dealerdirect/phpcodesniffer-composer-installer": true
-		}
-	}
+    "name": "liquiddesign/forms",
+    "description": "Ⓕ Vícejazyčné formuláře do Nette, doplněné o nové prvky, wysiwyg, antispam kontrolu a prevenci doubleclicku",
+    "license": "MIT",
+    "prefer-stable": true,
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Forms\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=8.2",
+        "nette/application": "~3.0",
+        "nette/forms": "^3.2",
+        "nette/utils": "~4.0",
+        "nette/di": "~3.0",
+        "nette/component-model": "~3.0",
+        "liquiddesign/storm": "~2.0",
+        "liquiddesign/base": "~2.0",
+        "liquiddesign/security": "~2.0"
+    },
+    "require-dev": {
+        "nette/tester": "*",
+        "tracy/tracy": "*",
+        "composer/composer": "*",
+        "liquiddesign/codestyle": "~3.0",
+        "phpstan/phpstan": "*"
+    },
+    "scripts": {
+        "fix-code": [
+            "@phpcsfix"
+        ],
+        "code-style": [
+            "@phpcsfix",
+            "@phpcs"
+        ],
+        "check-code": [
+            "@phpcs",
+            "@phpstan"
+        ],
+        "phpstan": "phpstan analyse --memory-limit 2G -c phpstan.neon",
+        "phpstan8": "phpstan analyse --memory-limit 2G -c phpstan8.neon",
+        "phpcs": "phpcs --standard=ruleset.xml --ignore=assets src",
+        "phpcsfix": "phpcbf --standard=ruleset.xml --ignore=assets src",
+        "tester": "tester tests/Tests/*.phpt  -c tests/php.ini --setup tests/setup.php",
+        "check-commit": "@php ./vendor/liquiddesign/codestyle/src/scripts/check-last-commit.php",
+        "changelog": "conventional-changelog --config=./vendor/liquiddesign/codestyle/src/changelog/changelog-config.php",
+        "release": "@changelog --commit",
+        "release:patch": "@changelog --patch --commit",
+        "release:minor": "@changelog --minor --commit",
+        "release:major": "@changelog --major --commit"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "version": "3.0.0"
 }
