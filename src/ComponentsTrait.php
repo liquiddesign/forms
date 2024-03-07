@@ -27,9 +27,9 @@ trait ComponentsTrait
 				'width' => 1024,
 				'insertcontent' => $textarea->getParent() instanceof LocaleContainer,
 				'save' => true,
-			] + $this->getForm()->getWysiwygConfiguration();
+			] + $this->getLocaleForm()->getWysiwygConfiguration();
 		
-		$this->getForm()->addPolyfill('tinymce', $textarea->getHtmlId(), $configuration + $init);
+		$this->getLocaleForm()->addPolyfill('tinymce', $textarea->getHtmlId(), $configuration + $init);
 		$textarea->setHtmlAttribute('class', 'tinymce');
 		
 		return $textarea;
@@ -50,37 +50,32 @@ trait ComponentsTrait
 		return $this->addRichEdit($name, $label, $configuration + $init);
 	}
 	
-	public function addDate(string $name, ?string $label = null, ?array $configuration = []): TextInput
+	public function addPolyfillDate(string $name, ?string $label = null, ?array $configuration = []): TextInput
 	{
 		$textbox = $this->addText($name, $label);
 		
-		$this->getForm()->addPolyfill('flatpickr', $textbox->getHtmlId(), $configuration);
+		$this->getLocaleForm()->addPolyfill('flatpickr', $textbox->getHtmlId(), $configuration);
 		$textbox->setHtmlAttribute('class', 'flatpicker');
 		
 		return $textbox;
 	}
 	
-	public function addDatetime(string $name, ?string $label = null, ?array $configuration = []): TextInput
+	public function addPolyfillDatetime(string $name, ?string $label = null, ?array $configuration = []): TextInput
 	{
-		return $this->addDate($name, $label, $configuration + ['enableTime' => true, 'altFormat' => 'd.m.Y H:i']);
+		return $this->addPolyfillDate($name, $label, $configuration + ['enableTime' => true, 'altFormat' => 'd.m.Y H:i']);
 	}
 	
-	public function addTime(string $name, ?string $label = null, ?array $configuration = []): TextInput
+	public function addPolyfillTime(string $name, ?string $label = null, ?array $configuration = []): TextInput
 	{
-		return $this->addDate($name, $label, $configuration + ['enableTime' => true, 'noCalendar' => true, 'dateFormat' => 'H:i', 'time_24hr' => true]);
+		return $this->addPolyfillDate($name, $label, $configuration + ['enableTime' => true, 'noCalendar' => true, 'dateFormat' => 'H:i', 'time_24hr' => true]);
 	}
 	
-	public function addDateRange(string $name, ?string $label = null, ?array $configuration = []): TextInput
+	public function addPolyfillDateRange(string $name, ?string $label = null, ?array $configuration = []): TextInput
 	{
-		return $this->addDate($name, $label, $configuration + ['mode' => 'range']);
+		return $this->addPolyfillDate($name, $label, $configuration + ['mode' => 'range']);
 	}
-	
-	public function addColor($name, ?string $label = null): TextInput
-	{
-		return $this->addText($name, $label)->setHtmlType('color');
-	}
-	
-	public function addRange($name, ?string $label = null, int $min = 0, int $max = 100, ?array $configuration = []): Range
+
+	public function addPolyfillRange($name, ?string $label = null, int $min = 0, int $max = 100, ?array $configuration = []): Range
 	{
 		$rangebox = $this[$name] = (new Range($label, $min, $max));
 		
@@ -90,7 +85,7 @@ trait ComponentsTrait
 			'range' => ['min' => $min, 'max' => $max],
 		];
 		
-		$this->getForm()->addPolyfill('nouislider', $rangebox->getHtmlId(), $configuration + $init);
+		$this->getLocaleForm()->addPolyfill('nouislider', $rangebox->getHtmlId(), $configuration + $init);
 		$rangebox->setHtmlAttribute('class', 'nouislider');
 		
 		return $rangebox;
@@ -104,7 +99,7 @@ trait ComponentsTrait
 		
 		$selectbox = $this->addSelect($name, $label, $items);
 		
-		$this->getForm()->addPolyfill('tail.select', $selectbox->getHtmlId(), $configuration + $default);
+		$this->getLocaleForm()->addPolyfill('tail.select', $selectbox->getHtmlId(), $configuration + $default);
 		$selectbox->setHtmlAttribute('class', 'tail.select');
 		
 		return $selectbox;
@@ -124,7 +119,7 @@ trait ComponentsTrait
 		
 		$selectbox = $this->addMultiSelect($name, $label, $items);
 		
-		$this->getForm()->addPolyfill('tail.select', $selectbox->getHtmlId(), $configuration + $default);
+		$this->getLocaleForm()->addPolyfill('tail.select', $selectbox->getHtmlId(), $configuration + $default);
 		$selectbox->setHtmlAttribute('class', 'tail.select');
 		
 		return $selectbox;
@@ -137,8 +132,8 @@ trait ComponentsTrait
 		];
 		
 		$selectbox = $this->addSelect($name, $label, $items);
-		$this->getForm()->addPolyfill('multiselect2', $selectbox->getHtmlId(), $configuration + $default);
-		$this->getForm()->addPolyfill('multiselect2' . $this->getForm()->getAdminLang(), $selectbox->getHtmlId(), []);
+		$this->getLocaleForm()->addPolyfill('multiselect2', $selectbox->getHtmlId(), $configuration + $default);
+		$this->getLocaleForm()->addPolyfill('multiselect2' . $this->getLocaleForm()->getAdminLang(), $selectbox->getHtmlId(), []);
 		$selectbox->setHtmlAttribute('class', 'multiselect2');
 		
 		return $selectbox;
@@ -202,8 +197,8 @@ trait ComponentsTrait
 		];
 		
 		$selectbox = $this->addMultiSelect($name, $label, $items);
-		$this->getForm()->addPolyfill('multiselect2', $selectbox->getHtmlId(), $configuration + $default);
-		$this->getForm()->addPolyfill('multiselect2' . $this->getForm()->getAdminLang(), $selectbox->getHtmlId(), []);
+		$this->getLocaleForm()->addPolyfill('multiselect2', $selectbox->getHtmlId(), $configuration + $default);
+		$this->getLocaleForm()->addPolyfill('multiselect2' . $this->getLocaleForm()->getAdminLang(), $selectbox->getHtmlId(), []);
 		$selectbox->setHtmlAttribute('class', 'multiselect2');
 		
 		return $selectbox;

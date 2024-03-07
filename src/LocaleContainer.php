@@ -11,7 +11,7 @@ class LocaleContainer extends \Nette\Forms\Container
 	
 	public function forAll(callable $callback): self
 	{
-		foreach ($this->getForm()->getMutations() as $mutation) {
+		foreach ($this->getLocaleForm()->getMutations() as $mutation) {
 			$params = Helpers::reflectionOf($callback)->getNumberOfParameters() === 1 ? [$this[$mutation]] : [$this[$mutation], $mutation];
 			\call_user_func_array($callback, $params);
 		}
@@ -21,7 +21,7 @@ class LocaleContainer extends \Nette\Forms\Container
 	
 	public function forPrimary(callable $callback): self
 	{
-		$mutation = $this->getForm()->getPrimaryMutation();
+		$mutation = $this->getLocaleForm()->getPrimaryMutation();
 		$params = Helpers::reflectionOf($callback)->getNumberOfParameters() === 1 ? [$this[$mutation]] : [$this[$mutation], $mutation];
 		\call_user_func_array($callback, $params);
 		
@@ -30,8 +30,8 @@ class LocaleContainer extends \Nette\Forms\Container
 	
 	public function forSecondary(callable $callback): self
 	{
-		foreach ($this->getForm()->getMutations() as $mutation) {
-			if ($mutation === $this->getForm()->getPrimaryMutation()) {
+		foreach ($this->getLocaleForm()->getMutations() as $mutation) {
+			if ($mutation === $this->getLocaleForm()->getPrimaryMutation()) {
 				continue;
 			}
 			

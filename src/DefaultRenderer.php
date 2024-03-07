@@ -29,7 +29,9 @@ class DefaultRenderer extends DefaultFormRenderer
 			$pair->id = $control->getOption('id');
 		}
 		
-		if ($control instanceof BaseControl && $form = $control->getForm()) {
+		if ($control instanceof BaseControl) {
+			$form = $control->getForm();
+
 			if ($form instanceof Form) {
 				$controlMutation = $control->getControlPrototype()->getAttribute('data-mutation');
 				
@@ -52,7 +54,9 @@ class DefaultRenderer extends DefaultFormRenderer
 	{
 		$html = parent::renderLabel($control);
 		
-		if ($control instanceof BaseControl && $form = $control->getForm()) {
+		if ($control instanceof BaseControl) {
+			$form = $control->getForm();
+
 			if ($form instanceof Form) {
 				$controlMutation = $control->getControlPrototype()->getAttribute('data-mutation');
 				$showFlag = $control->getControlPrototype()->getAttribute('data-flag') ?? true;

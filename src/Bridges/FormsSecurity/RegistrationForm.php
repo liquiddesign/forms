@@ -30,7 +30,7 @@ class RegistrationForm extends Form
 	 * Occurs when the form was validated
 	 * @var array<callable(self, array|object): void|callable(array|object): void>
 	 */
-	public $onValidate = [];
+	public array $onValidate = [];
 	
 	public function __construct(
 		protected readonly bool $confirmation,

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Forms;
 
+use Nette\Application\ApplicationException;
 use Nette\Forms\Controls\BaseControl;
 use Nette\Forms\Controls\TextBase;
 use Nette\Utils\Strings;
@@ -30,15 +31,24 @@ use Nette\Utils\Strings;
  */
 trait LocaleComponentsTrait
 {
-	public function getForm(bool $throw = true): Form
+	public function getLocaleForm(): Form
 	{
-		// @phpstan-ignore-next-line
-		return $this instanceof Form ? $this : $this->lookup(Form::class, $throw);
+		if ($this instanceof Form) {
+			return $this;
+		}
+
+		$lookup = $this->lookup(Form::class);
+
+		if (!$lookup instanceof Form) {
+			throw new ApplicationException('Form not found');
+		}
+
+		return $lookup;
 	}
 	
 	public function setRequired(bool $required = true): void
 	{
-		foreach ($this->getForm()->getMutations() as $mutation) {
+		foreach ($this->getLocaleForm()->getMutations() as $mutation) {
 			if (!$this[$mutation] instanceof BaseControl) {
 				continue;
 			}
@@ -102,7 +112,7 @@ trait LocaleComponentsTrait
 		$controlName = (string) Strings::substring($name, Strings::length($prefix));
 		
 		if ($prefix === Strings::substring($name, 0, Strings::length($prefix)) && \method_exists($this, 'add' . $controlName)) {
-			return $this->addLocaleControls($this->getForm()->getPrimaryMutation(), $this->getForm()->getMutations(), Strings::lower($controlName), $arguments);
+			return $this->addLocaleControls($this->getLocaleForm()->getPrimaryMutation(), $this->getLocaleForm()->getMutations(), Strings::lower($controlName), $arguments);
 		}
 		
 		/** @noinspection PhpUndefinedClassInspection */
