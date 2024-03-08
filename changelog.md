@@ -4,6 +4,19 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [3.0.1](https://github.com/liquiddesign/forms/compare/v3.0.0...v3.0.1) (2024-03-08)
+
+### Styles
+
+* Code style 3.0 support ([f3cb5e](https://github.com/liquiddesign/forms/commit/f3cb5ef54ce3ff96e7610c1f39693b3bbea6d87e))
+
+### Builds
+
+* Dependency PHP 8.1 ([c1abb2](https://github.com/liquiddesign/forms/commit/c1abb21100d1737db41ab608a0acddac78ee7438))
+
+
+---
+
 ## [3.0.0](https://github.com/liquiddesign/forms/compare/v2.1.5...v3.0.0) (2024-03-07)
 
 ### Styles
