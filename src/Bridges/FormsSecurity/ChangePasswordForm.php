@@ -12,6 +12,7 @@ use StORM\Repository;
 class ChangePasswordForm extends \Nette\Application\UI\Form
 {
 	use SecurityFormTrait;
+
 	
 	protected DIConnection $connection;
 	

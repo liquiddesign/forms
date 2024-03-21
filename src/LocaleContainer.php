@@ -8,6 +8,7 @@ class LocaleContainer extends \Nette\Forms\Container
 {
 	use LocaleComponentsTrait;
 	use ComponentsTrait;
+
 	
 	public function forAll(callable $callback): self
 	{

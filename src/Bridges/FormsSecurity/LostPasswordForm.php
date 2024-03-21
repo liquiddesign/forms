@@ -12,7 +12,7 @@ use StORM\DIConnection;
 use StORM\Repository;
 
 /**
- * @method onRecover(\Forms\Bridges\FormsSecurity\LostPasswordForm $form)
+ * @method onRecover(\Forms\Bridges\FormsSecurity\LostPasswordForm $form, \Security\DB\Account $account)
  */
 class LostPasswordForm extends \Nette\Application\UI\Form
 {
@@ -88,8 +88,9 @@ class LostPasswordForm extends \Nette\Application\UI\Form
 		
 		$this->token = Nette\Utils\Random::generate(128);
 		
-		$this->accountRepository->one(['login' => $values['email']])->update(['confirmationToken' => $this->token]);
+		$account = $this->accountRepository->one(['login' => $values['email']], true);
+		$account->update(['confirmationToken' => $this->token]);
 		
-		$this->onRecover($this);
+		$this->onRecover($this, $account);
 	}
 }

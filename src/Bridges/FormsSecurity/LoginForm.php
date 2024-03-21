@@ -14,6 +14,7 @@ use Security\DB\IUser;
 class LoginForm extends \Nette\Application\UI\Form
 {
 	use SecurityFormTrait;
+
 	
 	/**
 	 * @var array<callable(static, \Nette\Security\IIdentity): void> Called when login success

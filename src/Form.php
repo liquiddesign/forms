@@ -23,6 +23,7 @@ class Form extends \Nette\Application\UI\Form
 {
 	use LocaleComponentsTrait;
 	use ComponentsTrait;
+
 	
 	public const MUTATION_SELECTOR_NAME = '__MUTATION_SELECTOR';
 	public const MUTATION_TRANSLATOR_NAME = 'active';
