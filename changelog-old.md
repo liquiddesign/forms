@@ -4,6 +4,18 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [3.0.3](https://github.com/liquiddesign/forms/compare/v3.0.2...v3.0.3) (2024-03-21)
+
+### Features
+
+
+##### Lost Password Form
+
+* Pass Account to onRecover ([da527a](https://github.com/liquiddesign/forms/commit/da527ab6c943d2b03db19029a6cdb61f87f35d1a))
+
+
+---
+
 ## [3.0.1](https://github.com/liquiddesign/forms/compare/v3.0.0...v3.0.1) (2024-03-08)
 
 ### Styles
