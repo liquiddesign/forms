@@ -9,6 +9,7 @@ use Forms\Controls\DoubleClickProtection;
 use Nette\Application\ApplicationException;
 use Nette\Forms\Controls\BaseControl;
 use Nette\Forms\Controls\Checkbox;
+use Nette\Forms\Controls\SubmitButton;
 use Nette\Localization\Translator;
 use Nette\Utils\Html;
 
@@ -361,7 +362,14 @@ class Form extends \Nette\Application\UI\Form
 			unset($component);
 		}
 	}
-	
+
+	public function getSubmitterName(): string|null
+	{
+		$submitter = $this->isSubmitted();
+
+		return $submitter instanceof SubmitButton ? $submitter->getName() : null;
+	}
+
 	protected function setReadonlyForDescendant(\Nette\Forms\Container $container, string $mutation): void
 	{
 		// TODO implement
