@@ -4,6 +4,18 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [3.0.5](https://github.com/liquiddesign/forms/compare/v3.0.4...v3.0.5) (2024-11-01)
+
+### Features
+
+
+##### Upload Handler
+
+* Allow WEBP format to filemanager ([07b969](https://github.com/liquiddesign/forms/commit/07b9690e276c8c1e8bee382077daa1cff6311df0))
+
+
+---
+
 ## [3.0.4](https://github.com/liquiddesign/forms/compare/v3.0.3...v3.0.4) (2024-09-27)
 
 ### Features
