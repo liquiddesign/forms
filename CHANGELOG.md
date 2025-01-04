@@ -4,6 +4,17 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [3.0.7](https://github.com/liquiddesign/forms/compare/v3.0.6...v3.0.7) (2025-01-04)
+
+### Builds
+
+* Update changelog command to use PHP interpreter ([51164b](https://github.com/liquiddesign/forms/commit/51164b0a42d71d052f4717cda9607199b05391c7))
+* Update Composer scripts to use [*@php*](https://github.com/php) prefix ([f30753](https://github.com/liquiddesign/forms/commit/f30753d4e6b0fccbea4847ea0b9665337c4f386d))
+* Update phpstan/phpstan dependency to ^2.1 ([2a5e8c](https://github.com/liquiddesign/forms/commit/2a5e8cebe18f95e3bf911602079a94248b4a8b9e))
+
+
+---
+
 ## [3.0.6](https://github.com/liquiddesign/forms/compare/v3.0.5...v3.0.6) (2024-11-04)
 
 ### Features
