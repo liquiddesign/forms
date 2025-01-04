@@ -45,7 +45,7 @@
         "phpcsfix": "@php phpcbf --standard=ruleset.xml --ignore=assets src",
         "tester": "tester tests/Tests/*.phpt  -c tests/php.ini --setup tests/setup.php",
         "check-commit": "@php ./vendor/liquiddesign/codestyle/src/scripts/check-last-commit.php",
-        "changelog": "conventional-changelog --config=./vendor/liquiddesign/codestyle/src/changelog/changelog-config.php",
+        "changelog": "@php conventional-changelog --config=./vendor/liquiddesign/codestyle/src/changelog/changelog-config.php",
         "release": "@changelog --commit",
         "release:patch": "@changelog --patch --commit",
         "release:minor": "@changelog --minor --commit",
