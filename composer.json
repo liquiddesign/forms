@@ -25,7 +25,7 @@
         "tracy/tracy": "*",
         "composer/composer": "*",
         "liquiddesign/codestyle": "~3.0",
-        "phpstan/phpstan": "*"
+        "phpstan/phpstan": "^2.1"
     },
     "scripts": {
         "fix-code": [
