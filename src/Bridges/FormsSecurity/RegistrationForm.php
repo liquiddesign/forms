@@ -29,6 +29,7 @@ class RegistrationForm extends Form
 	/**
 	 * Occurs when the form was validated
 	 * @var array<callable(self, array|object): void|callable(array|object): void>
+	 * @phpstan-ignore-next-line
 	 */
 	public array $onValidate = [];
 	

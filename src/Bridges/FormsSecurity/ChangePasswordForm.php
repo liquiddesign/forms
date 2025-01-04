@@ -34,7 +34,7 @@ class ChangePasswordForm extends \Nette\Application\UI\Form
 		
 		$class = \get_class($user->getIdentity());
 		
-		if (!\is_subclass_of($class, IUser::class) || !\is_subclass_of($class, Nette\Security\IIdentity::class)) {
+		if (!\is_subclass_of($class, IUser::class)) {
 			throw new \InvalidArgumentException("Wrong or empty class: $class");
 		}
 		
