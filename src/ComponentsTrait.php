@@ -20,7 +20,7 @@ trait ComponentsTrait
 {
 	public function addRichEdit(string $name, ?string $label = null, ?array $configuration = []): Wysiwyg
 	{
-		$textarea = $this[$name] = (new Wysiwyg($label));
+		$textarea = $this[$name] = new Wysiwyg($label);
 		
 		$init = [
 				'height' => 400,
@@ -77,7 +77,7 @@ trait ComponentsTrait
 
 	public function addPolyfillRange($name, ?string $label = null, int $min = 0, int $max = 100, ?array $configuration = []): Range
 	{
-		$rangebox = $this[$name] = (new Range($label, $min, $max));
+		$rangebox = $this[$name] = new Range($label, $min, $max);
 		
 		$init = [
 			'start' => [$min, $max],
@@ -206,11 +206,11 @@ trait ComponentsTrait
 	
 	public function addImagePicker($name, ?string $label = null, array $directories = [], ?string $infoText = null): UploadImage
 	{
-		return $this[$name] = (new UploadImage($label, $directories, $infoText));
+		return $this[$name] = new UploadImage($label, $directories, $infoText);
 	}
 	
 	public function addFilePicker($name, ?string $label = null, ?string $directory = null, ?string $infoText = null): UploadFile
 	{
-		return $this[$name] = (new UploadFile($label, $directory, $infoText));
+		return $this[$name] = new UploadFile($label, $directory, $infoText);
 	}
 }
