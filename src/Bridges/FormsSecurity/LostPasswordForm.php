@@ -6,6 +6,7 @@ namespace Forms\Bridges\FormsSecurity;
 
 use Base\ShopsConfig;
 use Nette;
+use Security\DB\Account;
 use Security\DB\AccountRepository;
 use Security\DB\IUser;
 use StORM\DIConnection;
@@ -28,6 +29,8 @@ class LostPasswordForm extends \Nette\Application\UI\Form
 	protected Repository $repository;
 	
 	private AccountRepository $accountRepository;
+
+	private Account $account;
 	
 	public function __construct(
 		DIConnection $connection,
@@ -71,6 +74,8 @@ class LostPasswordForm extends \Nette\Application\UI\Form
 			$account = $query->first();
 			
 			if ($account && $account->isActive()) {
+				$this->account = $account;
+
 				return;
 			}
 
@@ -82,15 +87,12 @@ class LostPasswordForm extends \Nette\Application\UI\Form
 		$this->onSuccess[] = [$this, 'success'];
 	}
 	
-	public function success(Nette\Forms\Form $form): void
+	public function success(): void
 	{
-		$values = $form->getValues('array');
-		
 		$this->token = Nette\Utils\Random::generate(128);
+
+		$this->account->update(['confirmationToken' => $this->token]);
 		
-		$account = $this->accountRepository->one(['login' => $values['email']], true);
-		$account->update(['confirmationToken' => $this->token]);
-		
-		$this->onRecover($this, $account);
+		$this->onRecover($this, $this->account);
 	}
 }
