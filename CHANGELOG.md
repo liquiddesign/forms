@@ -4,6 +4,22 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [3.0.8](https://github.com/liquiddesign/forms/compare/v3.0.7...v3.0.8) (2025-02-28)
+
+### Features
+
+
+##### Lost Password Form
+
+* Store account instance for token update ([b4d11a](https://github.com/liquiddesign/forms/commit/b4d11acc3300eb3775e20dea117f3dd2d22e1bed))
+
+### Styles
+
+* Fix ([ece326](https://github.com/liquiddesign/forms/commit/ece326352593be4533068d955c0658b222381014))
+
+
+---
+
 ## [3.0.7](https://github.com/liquiddesign/forms/compare/v3.0.6...v3.0.7) (2025-01-04)
 
 ### Builds
