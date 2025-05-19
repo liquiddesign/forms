@@ -4,6 +4,18 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [3.0.9](https://github.com/liquiddesign/forms/compare/v3.0.8...v3.0.9) (2025-05-19)
+
+### Features
+
+
+##### Container
+
+* Add method to create and add a new container ([001610](https://github.com/liquiddesign/forms/commit/00161006cb606213be4b9535dc8d6e16bd282696))
+
+
+---
+
 ## [3.0.8](https://github.com/liquiddesign/forms/compare/v3.0.7...v3.0.8) (2025-02-28)
 
 ### Features
