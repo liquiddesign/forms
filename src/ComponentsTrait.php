@@ -204,12 +204,12 @@ trait ComponentsTrait
 		return $selectbox;
 	}
 	
-	public function addImagePicker($name, ?string $label = null, array $directories = [], ?string $infoText = null): UploadImage
+	public function addImagePicker($name, $label = null, array $directories = [], ?string $infoText = null): UploadImage
 	{
 		return $this[$name] = new UploadImage($label, $directories, $infoText);
 	}
 	
-	public function addFilePicker($name, ?string $label = null, ?string $directory = null, ?string $infoText = null): UploadFile
+	public function addFilePicker($name, $label = null, ?string $directory = null, ?string $infoText = null): UploadFile
 	{
 		return $this[$name] = new UploadFile($label, $directory, $infoText);
 	}
