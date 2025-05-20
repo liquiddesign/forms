@@ -4,6 +4,22 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [3.0.10](https://github.com/liquiddesign/forms/compare/v3.0.9...v3.0.10) (2025-05-20)
+
+### Bug Fixes
+
+
+##### Container
+
+* Use 'self' instead of 'static' for better clarity ([50b655](https://github.com/liquiddesign/forms/commit/50b65586e9c468c60ac2a0f2d56da35a77272a65))
+
+### Chores
+
+* Update GitHub Actions to use checkout@v4 and cache@v4 ([072654](https://github.com/liquiddesign/forms/commit/072654bc7b605c1069f9624ee8b655788259cdf4))
+
+
+---
+
 ## [3.0.9](https://github.com/liquiddesign/forms/compare/v3.0.8...v3.0.9) (2025-05-19)
 
 ### Features
