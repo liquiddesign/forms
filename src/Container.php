@@ -11,7 +11,7 @@ class Container extends \Nette\Forms\Container
 
 	public function addContainer(int|string $name): Container
 	{
-		$control = new static();
+		$control = new self();
 		$control->currentGroup = $this->currentGroup;
 		$this->currentGroup?->add($control);
 
