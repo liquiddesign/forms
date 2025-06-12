@@ -5,22 +5,24 @@ declare(strict_types=1);
 namespace Forms\Bridges\FormsSecurity;
 
 use Nette;
+use Nette\Application\UI\Form;
+use Nette\Forms\Control;
+use Nette\Localization\Translator;
 use Security\DB\IUser;
 use StORM\DIConnection;
 use StORM\Repository;
 
-class ChangePasswordForm extends \Nette\Application\UI\Form
+class ChangePasswordForm extends Form
 {
 	use SecurityFormTrait;
 
-	
 	protected DIConnection $connection;
 	
 	protected Nette\Security\User $user;
 	
 	protected Repository $repository;
 	
-	public function __construct(DIConnection $connection, Nette\Security\User $user)
+	public function __construct(DIConnection $connection, Nette\Security\User $user, private Translator $translator,)
 	{
 		parent::__construct();
 		
@@ -42,12 +44,12 @@ class ChangePasswordForm extends \Nette\Application\UI\Form
 		$this->repository = $this->connection->findRepository($class);
 		
 		$this->addPassword('oldPassword')
-			->addRule([$this, 'validateOldPassword'], 'changePasswordForm.oldPasswordCheck.notEqual', $user)
+			->addRule([$this, 'validateOldPassword'], $this->translator->translate('changePasswordForm.oldPasswordCheck-notEqual', 'Nesprávné heslo!'), $user)
 			->setRequired();
 		$this->addPassword('password')
 			->setRequired();
 		$this->addPassword('passwordCheck')
-			->addRule($this::EQUAL, 'changePasswordForm.passwordCheck.notEqual', $this['password'])
+			->addRule($this::Equal, $this->translator->translate('changePasswordForm.passwordCheck-notEqual', 'Zadaná hesla musí být stejná!'), $this['password'])
 			->setRequired();
 		$this->addSubmit('submit');
 		
@@ -64,7 +66,7 @@ class ChangePasswordForm extends \Nette\Application\UI\Form
 		$entity->getAccount()->changePassword($values['password']);
 	}
 	
-	public static function validateOldPassword(\Nette\Forms\Control $control, Nette\Security\User $user): bool
+	public static function validateOldPassword(Control $control, Nette\Security\User $user): bool
 	{
 		/** @var \Security\DB\IUser $entity */
 		$entity = $user->getIdentity();
