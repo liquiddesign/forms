@@ -49,7 +49,7 @@ class ChangePasswordForm extends Form
 		$this->addPassword('password')
 			->setRequired();
 		$this->addPassword('passwordCheck')
-			->addRule($this::Equal, $this->translator->translate('changePasswordForm.passwordCheck-notEqual', 'Zadaná hesla musí být stejná!'), $this['password'])
+			->addRule($this::Equal, $this->translator->translate('changePasswordForm.passwordCheck-notEqual', 'Hesla se neshodují!'), $this['password'])
 			->setRequired();
 		$this->addSubmit('submit');
 		
