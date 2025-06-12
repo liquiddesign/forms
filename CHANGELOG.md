@@ -4,6 +4,19 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [3.0.11](https://github.com/liquiddesign/forms/compare/v3.0.10...v3.0.11) (2025-06-12)
+
+### Bug Fixes
+
+* Adding defaults to password form messages ([ab286e](https://github.com/liquiddesign/forms/commit/ab286ee2cbd29aa92a323b8bb084f91490e3683a))
+
+### Chores
+
+* Chore ([81d446](https://github.com/liquiddesign/forms/commit/81d446e45de977eb855e174338a32cc1eb4ee0c0))
+
+
+---
+
 ## [3.0.10](https://github.com/liquiddesign/forms/compare/v3.0.9...v3.0.10) (2025-05-20)
 
 ### Bug Fixes
