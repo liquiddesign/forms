@@ -370,9 +370,73 @@ class Form extends \Nette\Application\UI\Form
 		return $submitter instanceof SubmitButton ? $submitter->getName() : null;
 	}
 
+	/**
+	 * @return array<mixed>
+	 */
+	public function getControlsErrors(): array
+	{
+		$errors = [];
+
+		/** @var \Nette\Forms\Control|\Nette\Forms\Container $component */
+		foreach ($this->getComponents(true) as $component) {
+			if ($component instanceof BaseControl) {
+				$componentName = $component->getHtmlId();
+				$componentErrors = $component->getErrors();
+
+				if ($componentErrors) {
+					$errors[$componentName] = [
+						'label' => (string) $component->getLabel(),
+						'errors' => $componentErrors,
+					];
+				}
+			}
+
+			continue;
+		}
+
+		return $errors;
+	}
+
 	protected function setReadonlyForDescendant(\Nette\Forms\Container $container, string $mutation): void
 	{
 		// TODO implement
 		unset($container, $mutation);
+	}
+
+	/**
+	 * Recursively collects form errors in a hierarchical structure
+	 * @return array<mixed>
+	 */
+	private static function getFormErrorsRecursive(\Nette\Forms\Form|\Nette\Forms\Container $container): array
+	{
+		$errors = [];
+
+		/** @var \Nette\Forms\Control|\Nette\Forms\Container $component */
+		foreach ($container->getComponents() as $component) {
+			$componentName = $component->getName();
+
+			if ($component instanceof \Nette\Forms\Container) {
+				// If it's a container, recursively get its errors
+				$containerErrors = self::getFormErrorsRecursive($component);
+
+				if ($containerErrors) {
+					$errors[$componentName] = [
+						'components' => $containerErrors,
+					];
+				}
+			} else {
+				// If it's a control, get its errors
+				$componentErrors = $component->getErrors();
+
+				if ($componentErrors) {
+					$errors[$componentName] = [
+						'label' => $component instanceof BaseControl ? (string) $component->getLabel() : null,
+						'errors' => $componentErrors,
+					];
+				}
+			}
+		}
+
+		return $errors;
 	}
 }
