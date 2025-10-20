@@ -4,6 +4,15 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [3.0.12](https://github.com/liquiddesign/forms/compare/v3.0.11...v3.0.12) (2025-10-20)
+
+### Features
+
+* Add recursive form errors collection ([9490bd](https://github.com/liquiddesign/forms/commit/9490bd9f2e1b6b73a9edf7e4b33478e4d268850e))
+
+
+---
+
 ## [3.0.11](https://github.com/liquiddesign/forms/compare/v3.0.10...v3.0.11) (2025-06-12)
 
 ### Bug Fixes
