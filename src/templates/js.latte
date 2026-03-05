@@ -48,7 +48,37 @@
         					polyfills[{$id}] = tail.select({("#$id")}, {\json_encode($configuration)|noescape});
 						{/if}
 						{if $name === 'multiselect2'}
+							{do $collapsibleRows = $configuration['collapsibleRows'] ?? null}
+							{do $configuration = array_diff_key($configuration, ['collapsibleRows' => true])}
 							$('#' + {$id}).select2({\json_encode($configuration)|noescape});
+							{if $collapsibleRows}
+							(function() {
+								var id = {$id};
+								var rows = {$collapsibleRows};
+								var container = $('#' + id).next('.select2-container');
+								var maxHeight = rows * 32;
+								container.addClass('select2-collapsible');
+								container.css('--collapsible-rows', maxHeight + 'px');
+								var toggle = $('<button type="button" class="select2-collapsible-toggle">Zobrazit více</button>');
+								toggle.insertAfter(container);
+								function updateToggle() {
+									var sel = container.find('.select2-selection--multiple')[0];
+									if (sel && sel.scrollHeight > maxHeight) {
+										toggle.show();
+									} else {
+										toggle.hide();
+										container.removeClass('select2-expanded');
+										toggle.text('Zobrazit více');
+									}
+								}
+								toggle.on('click', function() {
+									container.toggleClass('select2-expanded');
+									toggle.text(container.hasClass('select2-expanded') ? 'Zobrazit méně' : 'Zobrazit více');
+								});
+								$('#' + id).on('change', function() { setTimeout(updateToggle, 100); });
+								setTimeout(updateToggle, 200);
+							})();
+							{/if}
 						{/if}
 						{if $name === 'tinymce'}
         					polyfills[{$id}] = initTinyMCExconf({("#$id")}, {\json_encode($configuration)|noescape});
