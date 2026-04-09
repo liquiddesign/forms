@@ -18,7 +18,7 @@ use StORM\Repository;
 class LostPasswordForm extends \Nette\Application\UI\Form
 {
 	/**
-	 * @var array<callable(static): void> Called when recover success
+	 * @var array<callable(static, \Security\DB\Account): void> Called when recover success
 	 */
 	public array $onRecover = [];
 	
