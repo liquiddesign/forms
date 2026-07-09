@@ -5,18 +5,7 @@ document.addEventListener("DOMContentLoaded", function(event)
         var old = Forms.addError;
         Forms.addError = function (el, message) {
             old.apply(this, arguments);
-
-            var mutation = el.getAttribute('data-mutation');
-
-            if (mutation === null || !el.form) {
-                return;
-            }
-
-            var mutationSelector = el.form.querySelector("input[name=__MUTATION_SELECTOR][value=" + mutation + "]");
-
-            if (mutationSelector) {
-                mutationSelector.click();
-            }
+            el.form.querySelector("input[name=__MUTATION_SELECTOR][value=" + el.getAttribute('data-mutation') + "]").click();
         };
     }
 });
