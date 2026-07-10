@@ -4,6 +4,14 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [3.0.18](https://github.com/liquiddesign/forms/compare/v3.0.16...v3.0.18) (2026-07-10)
+
+### Bug Fixes
+
+* Guard mutation-selector click in `Forms.addError` when `data-mutation` or mutation input is missing ([2.1](https://github.com/liquiddesign/forms/tree/2.1))
+
+---
+
 ## [3.0.12](https://github.com/liquiddesign/forms/compare/v3.0.11...v3.0.12) (2025-10-20)
 
 ### Features
