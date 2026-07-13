@@ -2,6 +2,8 @@ parameters:
 	level: 5
 	paths:
 		- src
+	stubFiles:
+		- phpstan/DefaultTemplate.stub
 
 	excludePaths:
 		- src/assets/*
