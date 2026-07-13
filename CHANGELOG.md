@@ -4,6 +4,14 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [3.0.19](https://github.com/liquiddesign/forms/compare/v3.0.18...v3.0.19) (2026-07-13)
+
+### Bug Fixes
+
+* `lqdForm.js`: compute `emptyOptional` in `Nette.validateControl` for netteForms 2.4 — nette/forms 3.x (PHP) no longer exports the `{op: 'optional'}` marker, so client-side validation of empty optional `:float`/`:integer` fields falsely blocked form submits ("Zadejte platné číslo") on projects pairing PHP nette/forms 3.x with netteForms.js 2.4 ([2.1](https://github.com/liquiddesign/forms/tree/2.1))
+
+---
+
 ## [3.0.18](https://github.com/liquiddesign/forms/compare/v3.0.16...v3.0.18) (2026-07-10)
 
 ### Bug Fixes
