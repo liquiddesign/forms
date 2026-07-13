@@ -45,7 +45,8 @@ class UploadFile extends \Nette\Forms\Controls\UploadControl implements ISignalR
 		
 		$element = $this;
 		
-		$this->monitor(\Forms\Form::class, function (\Forms\Form $form) use ($element): void {
+		$this->monitor(\Nette\Forms\Form::class, function ($form) use ($element): void {
+			/** @var \Forms\Form $form */
 			$element->onDelete[] = static function ($directory, $filename) use ($form): void {
 				FileSystem::delete($form->getUserDir() . \DIRECTORY_SEPARATOR . $directory . \DIRECTORY_SEPARATOR . $filename);
 			};
