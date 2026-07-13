@@ -16,6 +16,7 @@
         "nette/utils": "~3.0 || ~4.0",
         "nette/di": "~3.0",
         "nette/component-model": "~3.0",
+        "nette/mail": "~3.0 || ~4.0",
         "liquiddesign/storm": "~2.0",
         "liquiddesign/base": "~2.0",
         "liquiddesign/security": "~2.0"

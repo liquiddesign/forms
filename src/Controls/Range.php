@@ -38,7 +38,7 @@ class Range extends BaseControl
 		if ($value === null) {
 			$value = [];
 		} elseif (!\is_array($value)) {
-			throw new \InvalidArgumentException(\sprintf("Value must be array or null, %s given in field '%s'.", \gettype($value), $this->name));
+			throw new \InvalidArgumentException(\sprintf("Value must be array or null, %s given in field '%s'.", \gettype($value), $this->getName()));
 		}
 		
 		$this->value = $value;

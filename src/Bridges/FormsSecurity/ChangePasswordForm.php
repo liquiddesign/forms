@@ -44,7 +44,7 @@ class ChangePasswordForm extends Form
 		$this->repository = $this->connection->findRepository($class);
 		
 		$this->addPassword('oldPassword')
-			->addRule([$this, 'validateOldPassword'], $this->translator->translate('changePasswordForm.oldPasswordCheck-notEqual', 'Nesprávné heslo!'), $user)
+			->addRule([$this, 'validateOldPassword'], $this->translator->translate('changePasswordForm.oldPasswordCheck-notEqual', 'Nesprávné heslo!'))
 			->setRequired();
 		$this->addPassword('password')
 			->setRequired();
@@ -66,10 +66,10 @@ class ChangePasswordForm extends Form
 		$entity->getAccount()->changePassword($values['password']);
 	}
 	
-	public static function validateOldPassword(Control $control, Nette\Security\User $user): bool
+	public function validateOldPassword(Control $control): bool
 	{
 		/** @var \Security\DB\IUser $entity */
-		$entity = $user->getIdentity();
+		$entity = $this->user->getIdentity();
 		
 		return $entity->getAccount()->checkPassword($control->getValue());
 	}
