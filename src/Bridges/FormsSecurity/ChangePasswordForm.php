@@ -44,6 +44,7 @@ class ChangePasswordForm extends Form
 		$this->repository = $this->connection->findRepository($class);
 		
 		$this->addPassword('oldPassword')
+			// @phpstan-ignore-next-line argument.type
 			->addRule([$this, 'validateOldPassword'], $this->translator->translate('changePasswordForm.oldPasswordCheck-notEqual', 'Nesprávné heslo!'), $user)
 			->setRequired();
 		$this->addPassword('password')

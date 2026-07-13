@@ -1,0 +1,10 @@
+<?php
+
+namespace Nette\Bridges\ApplicationLatte;
+
+/**
+ * @property array<mixed> $tinyConfig
+ */
+class DefaultTemplate extends Template
+{
+}

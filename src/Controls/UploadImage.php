@@ -52,6 +52,7 @@ class UploadImage extends \Nette\Forms\Controls\UploadControl implements ISignal
 		$element = $this;
 		
 		$this->monitor(\Nette\Forms\Form::class, function ($form) use ($element): void {
+			/** @var \Forms\Form $form */
 			$element->onDelete[] = static function ($directories, $filename) use ($form): void {
 				foreach (\array_keys($directories) as $directory) {
 					try {
