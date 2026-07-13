@@ -19,6 +19,24 @@ document.addEventListener("DOMContentLoaded", function(event)
             }
         };
     }
+
+    // nette/forms 3.x (PHP) uz neexportuje marker {op: 'optional'}, ktery netteForms 2.4
+    // potrebuje k preskoceni prazdnych nepovinnych poli. Bez nej klientska validace
+    // :float/:integer na prazdnem nepovinnem poli chybne blokuje submit ("Zadejte platne cislo").
+    // Dopocitame emptyOptional stejne, jako to dela netteForms 3.x (emptyOptional ??= !:filled).
+    if (typeof Nette !== 'undefined' && Nette.version === '2.4' && typeof Nette.validateControl === 'function') {
+        var oldValidateControl = Nette.validateControl;
+        Nette.validateControl = function (elem, rules, onlyCheck, value, emptyOptional) {
+            elem = elem.tagName ? elem : elem[0]; // RadioNodeList
+
+            if (emptyOptional === undefined) {
+                var curValue = value === undefined ? {value: Nette.getEffectiveValue(elem)} : value;
+                emptyOptional = !Nette.validateRule(elem, ':filled', null, curValue);
+            }
+
+            return oldValidateControl.call(this, elem, rules, onlyCheck, value, emptyOptional);
+        };
+    }
 });
 
 function formChangeMutation(form, mutation)
