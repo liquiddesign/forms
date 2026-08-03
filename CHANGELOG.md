@@ -4,6 +4,18 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [3.0.23](https://github.com/liquiddesign/forms/compare/v3.0.19...v3.0.23) (2026-08-03)
+
+### Bug Fixes
+
+* File manager: guard both `getimagesize()` call sites against `false`, which it returns for corrupt files or non-images carrying an image extension. On PHP 8.4+ every listing of such a folder emitted warnings that Tracy logged as production errors — `Cannot use bool as array` from the `list()` destructuring in `dialog.php` (the `@` operator only covered the `getimagesize()` call itself), and `Trying to access array offset on false` in `image_check_memory_usage()` in `utils.php`, reached on the first listing before any thumbnail exists. `image_check_memory_usage()` now reports failure, so a broken file no longer reaches the thumbnail library ([2.1](https://github.com/liquiddesign/forms/tree/2.1))
+
+### Chores
+
+* Includes the previously unreleased PHPStan fixes in forms security and upload controls ([2.1](https://github.com/liquiddesign/forms/tree/2.1))
+
+---
+
 ## [3.0.19](https://github.com/liquiddesign/forms/compare/v3.0.18...v3.0.19) (2026-07-13)
 
 ### Bug Fixes
