@@ -1093,7 +1093,9 @@ $files = $sorted;
                             }
                         }
                         //check if is smaller than thumb
-                        list($img_width, $img_height, $img_type, $attr)=@getimagesize($file_path);
+                        //getimagesize() returns false for unreadable/corrupt files; destructuring false emits
+                        //E_WARNING "Cannot use bool as array" since PHP 8.4, so fall back to nulls explicitly
+                        list($img_width, $img_height, $img_type, $attr)=@getimagesize($file_path) ?: [null, null, null, null];
                         if($img_width<122 && $img_height<91){
                             $src_thumb=$file_path;
                             $show_original=true;
