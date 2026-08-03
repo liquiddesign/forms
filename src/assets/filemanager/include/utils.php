@@ -884,7 +884,14 @@ function image_check_memory_usage($img, $max_breedte, $max_hoogte)
 			if (strpos($mem, 'M') !== false) $memory_limit = abs(intval(str_replace(array('M'), '', $mem) * 1024 * 1024));
 			if (strpos($mem, 'G') !== false) $memory_limit = abs(intval(str_replace(array('G'), '', $mem) * 1024 * 1024 * 1024));
 			
-			$image_properties = getimagesize($img);
+			//getimagesize() returns false for non-image or unreadable files; bail out instead of
+			//reading offsets off it, which emits warnings on PHP 8.4+ and would let a broken file
+			//continue into the thumbnail library
+			$image_properties = @getimagesize($img);
+			if($image_properties === false){
+				return false;
+			}
+
 			$image_width = $image_properties[0];
 			$image_height = $image_properties[1];
 			if (isset($image_properties['bits']))
